@@ -1,9 +1,8 @@
 // src/components/NavBar/NavBar.jsx
 import { useContext } from "react";
 import { Link } from "react-router";
-
 import { UserContext } from "../../contexts/UserContext";
-
+import './NavBar.css';
 
 const NavBar = () => {
     // Pass the UserContext object to the useContext hook to access:
@@ -23,22 +22,29 @@ const NavBar = () => {
 
   return (
 <nav>
+  <div className="site-logo-container">
+  <div className="site-name">
+    <h1 className="site-name-front">Git</h1><h1 className="site-name-back">Central</h1>
+  </div>
+  <p id="site-slogan">"Your home for dev-dialogue"</p>
+  </div>
+ 
+  <div className="nav-links">
       {user ? (
         <ul>
           <li>Welcome, {user.username}</li>
-          {/* The new link */}
           <li><Link to='/'>Dashboard</Link></li>
           <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
         </ul>
       ) : (
         <ul>
-          {/* Another new link */}
           <li><Link to='/'>Home</Link></li>
           <li><Link to='/sign-in'>Sign In</Link></li>
           <li><Link to='/sign-up'>Sign Up</Link></li>
         </ul>
       )}
-    </nav>
+  </div>
+</nav>
   );
 };
 
