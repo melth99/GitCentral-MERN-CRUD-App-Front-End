@@ -38,7 +38,7 @@
 #topic-board {
   display: flex;
   border-radius: 10px;
-  height: 40vh;
+  height: 30vh;
   background-color: var(--cs-light-blue);
 }
 

@@ -5,7 +5,6 @@ import { UserContext } from '../../contexts/UserContext';
 import * as userService from '../../services/userService';
 import './Dashboard.css';
 import TopicBoard from './TopicBoard';
-import HotTopics from './HotTopics';
 
 const Dashboard = () => {
   const { user } = useContext(UserContext);
