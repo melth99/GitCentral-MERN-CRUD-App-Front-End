@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import './TopicBoard.css';
+import HotTopics from './HotTopics';
 
 const TopicBoard = () => {
   const { user } = useContext(UserContext);
@@ -17,13 +18,10 @@ const TopicBoard = () => {
           {/* //TODO: Follow button updates HOME page feed with suggested posts<br></br>
           //TODO: Also, if following, button will display "following, and change to the color green. <br></br>
           //TODO: If not following, button will display "follow" and change to the color blue. */}
-          <div><button class="follow-button">followers: ___<img></img></button> # of followers</div>
+          <div><button class="follow-button">followers: ___</button></div>
           </div>
         </div>
-        <h1>Welcome, {user.username}</h1>
-        <p>
-          This is the dashboard page where you can see a list of all the users.
-        </p>
+        <HotTopics />
       </main>
     </div>
   );

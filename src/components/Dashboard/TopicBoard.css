@@ -17,13 +17,14 @@
   justify-content: flex-start; /* Align items to the top */
   align-items: stretch; /* Stretch items to fill the container */
   background-color: var(--cs-black);
-  height: 100vh; /* Full height of the viewport */
+  height: 96vh; /* Full height of the viewport */
   border: 5px solid var(--cs-light-blue);
 }
 
 #dash-body {
   display: flex;
-  margin: 10px;
+  margin: 10px 10px 0 10px;
+  margin-bottom: 0;
   border-radius: 10px;
   flex-direction: column; /* Allow vertical stacking of elements */
   justify-content: flex-start; /* Align items to the top */
@@ -37,7 +38,7 @@
 #topic-board {
   display: flex;
   border-radius: 10px;
-  height: 30vh;
+  height: 40vh;
   background-color: var(--cs-light-blue);
 }
 
@@ -74,7 +75,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: left;
+  align-items: flex-start; /* Use flex-start to align items to the left */
   width: 100%;
   height: 100%;
   padding: 1vh;
@@ -108,14 +109,3 @@
   background-color: #21A179; /* Hover background color when followed */
   color: #FFFFFF; /* Hover text color when followed */
 }
-
-/* If you want to implement infinite scroll, see code below */
-/* #dash-body {
-  display: flex;
-  flex-direction: column; /* Allow vertical stacking of elements */
-  /* justify-content: flex-start; Align items to the top */
-  /* align-items: stretch; Stretch items to fill the container */
-  /* background-color: var(--cs-black); */
-  /* position: relative; */
-  /* overflow-y: auto; Enable vertical scrolling */
-  /* height: calc(100vh - 8vh); Full height minus the navbar */ 
