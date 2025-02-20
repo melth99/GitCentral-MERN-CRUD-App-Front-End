@@ -1,18 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&display=swap');
+
 * {
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 
 :root {
   --main-bg-color: blue;
   --sand-tan: #e1b382;
   --night-blue: #2d545e;
+  --cs-black: #000000;
 }
 
 body {
-  background-color: gray;
-  /* Use a system font; if none are available, use an available sans-serif font */
-  font-family: system-ui, sans-serif;
-  /* Ensures full height compatibility across devices */
-  min-height: 100dvh;
+  background-color: var(--cs-black);
+  font-family: system-ui, sans-serif; 
+  min-height: 100vh; 
   margin: 0;
+}
+
+h1 {
+  font-family: 'Orbitron', sans-serif; /* Apply Orbitron for headings */
+}
+
+h2 {
+  font-family: 'Audiowide', sans-serif; /* Apply Audiowide for subheadings */
+}
+
+p {
+  font-family: 'Russo One', sans-serif; /* Apply Russo One for paragraphs */
+}
+
+.nav-links {
+  font-family: 'Exo 2', sans-serif; /* Apply Exo 2 for navigation links */
+}
+
+.button {
+  font-family: 'Dosis', sans-serif; /* Apply Dosis for buttons */
+}
+
+.special-text {
+  font-family: 'Lobster', cursive; /* Apply Lobster for special text */
 }

@@ -21,6 +21,7 @@ const NavBar = () => {
   }
 
   return (
+    // TODO: Convert site-logo-container to a clickable link that navigates to the home page
 <nav>
   <div className="site-logo-container">
   <div className="site-name">
@@ -32,8 +33,9 @@ const NavBar = () => {
   <div className="nav-links">
       {user ? (
         <ul>
-          <li>Welcome, {user.username}</li>
-          <li><Link to='/'>Dashboard</Link></li>
+          <li><Link to='/'>Profile</Link></li>
+          <li><Link to='/'>Forum</Link></li>
+          <li><Link to='/'>Posts</Link></li>
           <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
         </ul>
       ) : (

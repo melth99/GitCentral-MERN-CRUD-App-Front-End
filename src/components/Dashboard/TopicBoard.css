@@ -1,0 +1,121 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#dash-container {
+  display: flex;
+  margin-top: 0;
+  margin-left: 15px;
+  margin-right: 15px;
+  border-radius: 20px;
+  flex-direction: column; /* Allow vertical stacking of elements */
+  justify-content: flex-start; /* Align items to the top */
+  align-items: stretch; /* Stretch items to fill the container */
+  background-color: var(--cs-black);
+  height: 100vh; /* Full height of the viewport */
+  border: 5px solid var(--cs-light-blue);
+}
+
+#dash-body {
+  display: flex;
+  margin: 10px;
+  border-radius: 10px;
+  flex-direction: column; /* Allow vertical stacking of elements */
+  justify-content: flex-start; /* Align items to the top */
+  align-items: stretch; /* Stretch items to fill the container */
+  background-color: var(--cs-black);
+  position: relative;
+  overflow-y: auto; /* Enable vertical scrolling */
+  height: calc(100vh - 8vh); /* Full height minus the navbar */
+}
+
+#topic-board {
+  display: flex;
+  border-radius: 10px;
+  height: 30vh;
+  background-color: var(--cs-light-blue);
+}
+
+.image-container {
+  width: 100%;
+  height: auto;
+  max-width: 20vw;
+  max-height: 30vh;
+  border-radius: 10px;
+  border-style: ridge;
+  border-color: var(--cs-black);
+  margin: 1vh;
+  position: relative;
+  background-color: var(--cs-black); 
+  background-image: url('https://images.squarespace-cdn.com/content/v1/5e3b1164feb39b444b58f15b/1679166980153-L9SIFE4S7D6N4KGPW809/unsplash-image-m3hn2Kn5Bns.jpg'); /* Default background image */
+  background-size: 20vw 30vh;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Hide image container's content if the image is not available */
+.image-container img[style="display: none;"] {
+  visibility: hidden;
+}
+
+#topic-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  width: 100%;
+  height: 100%;
+  padding: 1vh;
+}
+
+.follow-button {
+  font-family: 'Dosis', sans-serif; /* Apply Dosis font to the follow button */
+  font-size: 1.2rem; /* Increase the font size */
+  background-color: #88C0D0; /* Default background color */
+  color: #021013; /* Default text color */
+  border: none;
+  border-radius: 20px;
+  padding: 5px 20px;
+  margin-top: 1vh;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for smooth color changes */
+  border: 2px solid var(--cs-black); /* Add border */
+}
+
+.follow-button:hover {
+  background-color: var(--cs-black); /* Hover background color */
+  color: #FFFFFF; /* Hover text color */
+}
+
+.follow-button.followed {
+  background-color: #4C566A; /* Active background color */
+  color: #FFFFFF; /* Active text color */
+}
+
+.follow-button.followed:hover {
+  background-color: #21A179; /* Hover background color when followed */
+  color: #FFFFFF; /* Hover text color when followed */
+}
+
+/* If you want to implement infinite scroll, see code below */
+/* #dash-body {
+  display: flex;
+  flex-direction: column; /* Allow vertical stacking of elements */
+  /* justify-content: flex-start; Align items to the top */
+  /* align-items: stretch; Stretch items to fill the container */
+  /* background-color: var(--cs-black); */
+  /* position: relative; */
+  /* overflow-y: auto; Enable vertical scrolling */
+  /* height: calc(100vh - 8vh); Full height minus the navbar */ 
