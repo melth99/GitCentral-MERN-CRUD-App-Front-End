@@ -1,0 +1,20 @@
+.select-forum-button {
+  font-family: 'Dosis', sans-serif;
+  font-size: 1.2rem;
+  background-color: #88C0D0;
+  color: #021013;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 20px;
+  margin-top: 1vh;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: 2px solid var(--cs-black);
+  position: relative;
+  z-index: 1;
+}
+
+.select-forum-button:hover {
+  background-color: var(--cs-black);
+  color: #FFFFFF;
+}

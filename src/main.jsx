@@ -5,6 +5,7 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router'
 
 import { UserProvider } from './contexts/UserContext.jsx'
+import './styles/variables.css'
 
 
 createRoot(document.getElementById('root')).render(
