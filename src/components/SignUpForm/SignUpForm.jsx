@@ -4,16 +4,18 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 
 // The context is how you can access the global
-// state 
+// state
 import { UserContext } from '../../contexts/UserContext';
 
 import { signUp } from '../../services/authService';
 
+import "./SignUpForm.css"
+
 const SignUpForm = () => {
-    // navigate is a function that takes in a path 
+    // navigate is a function that takes in a path
     // we defined on one of our routes
 
-    // consume the context! 
+    // consume the context!
     // here we can destructure setUser, or user state
     const {setUser} = useContext(UserContext)
 
@@ -44,7 +46,7 @@ const SignUpForm = () => {
             console.log(newUser, " <- new User (decoded jwt token)")
         } catch (err) {
             console.log(err)
-            // update the state to whatever the error message is 
+            // update the state to whatever the error message is
             // to display to the user
             setMessage(err.message)
         }
