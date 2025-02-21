@@ -1,0 +1,104 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#new-post-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 60%;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+#post-heading {
+  color: var(--cs-white);
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#new-post-title {
+  color: var(--cs-white);
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.new-post-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: var(--cs-black);
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  color: var(--cs-white);
+  margin-top: 5vh;
+}
+
+.new-post-input::placeholder {
+  color: #aaa;
+}
+
+.select-forum-button {
+  font-family: 'Dosis', sans-serif;
+  font-size: 1.2rem;
+  background-color: #88C0D0;
+  color: #021013;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 20px;
+  margin-top: 1vh;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: 2px solid var(--cs-black);
+  position: relative; /* Ensure the button is positioned relative to the dropdown */
+  z-index: 1; /* Ensure the button is above other content */
+}
+
+.select-forum-button:hover {
+  background-color: var(--cs-black);
+  color: #FFFFFF;
+}
+
+.forum-dropdown-content {
+  position: absolute; /* Position below the button with a small gap */
+  left: 2vw;
+  z-index: 2; /* Ensure the dropdown is above other content */
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  background-color: rgba(0, 0, 0, 1); /* Full opacity */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20%;
+  margin-left: 3%;
+}
+
+.dropdown-item {
+  padding: 10px;
+  text-decoration: none;
+  color: var(--cs-white);
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #ddd;
+}
+
+/* .post-title {
+  margin-top: 1vh;
+  border-radius: 10px;
+} */

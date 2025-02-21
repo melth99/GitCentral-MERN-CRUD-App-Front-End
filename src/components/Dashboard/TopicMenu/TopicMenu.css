@@ -1,0 +1,173 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#bottom-section {
+  display: flex;
+  width: 100%;
+  height: 61vh; /* Adjust the height as needed */
+}
+
+/* Adjustments for the hot topics container */
+#hot-topics-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30%; /* 30% width */
+  height: 100%; /* Full height of parent */
+  border-radius: 10px; /* Ensure border-radius applies to the entire container */
+  overflow: hidden; /* Ensure child elements respect the border-radius */
+  margin-left: 0;
+  margin-top: .5vh;
+  margin-right: .5vh;
+  position: relative;
+  background-color: var(--cs-black);
+  background-size: 20vw 30vh;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#hot-topic-title {
+  border-radius: 10px 10px; /* Top left and top right corners */
+  background-color: var(--cs-red);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  padding: 1vh;
+  color: var(--cs-white);
+  text-align: left;
+  margin-top: 1vh;
+}
+
+#hot-topic-menu {
+  border-radius: 10px 10px; /* Bottom left and bottom right corners */
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  color: var(--cs-white);
+  text-align: center;
+  margin-top: 1vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Adjust to align content to the top */
+  align-items: center;
+  width: 100%;
+  height: calc(100% - 4vh); /* Adjust height relative to the parent */
+  background-color: var(--cs-light-blue);
+  overflow: hidden; /* Ensure child elements do not overflow */
+}
+
+.hot-topic-menu-tab {
+  display: flex;
+  width: 100%;
+  height: 12.5%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: var(--cs-light-blue);
+  border-bottom: 2px solid var(--cs-black);
+  color: var(--cs-black);
+  font-family: 'Exo 2', sans-serif;
+  font-size: 1rem;
+  text-align: center;
+  flex-direction: column;
+}
+
+.hot-topic-menu-item {
+  display: flex;
+  height: 100%;
+  text-align: left;
+  padding: .5vh;
+  font-size: 1.3rem;
+  text-decoration: none;
+  color: var(--cs-red);
+  font-weight: bold;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.topic-menu-item {
+  height: 50%;
+  text-align: left;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  padding: .5vh;
+  font-size: .9rem;
+  text-decoration: underline;
+  color: var(--cs-red);
+  font-weight: bold;
+}
+
+.topic-menu-user {
+  height: 50%;
+  text-align: left;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  padding: .5vh;
+  font-size: .8rem;
+  text-decoration: underline;
+  color: var(--cs-black);
+}
+
+/* Adjustments for the topic menu container */
+#topic-menu-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 70%; /* 70% width */
+  height: 100%; /* Full height of parent */
+  border-radius: 10px; /* Ensure border-radius applies to the entire container */
+  overflow: hidden; /* Ensure child elements respect the border-radius */
+  margin-right: 0;
+  margin-left: .5vh;
+  margin-top: .5vh;
+  position: relative;
+  background-color: var(--cs-black);
+  background-size: 20vw 30vh;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#topic-menu-title {
+  border-radius: 10px 10px; /* Top left and top right corners */
+  background-color: var(--cs-red);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  padding: 1vh;
+  color: var(--cs-white);
+  text-align: left;
+  margin-top: 1vh;
+}
+
+#topic-menu-menu {
+  border-radius: 10px 10px; /* Bottom left and bottom right corners */
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  color: var(--cs-white);
+  text-align: center;
+  margin-top: 1vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Adjust to align content to the top */
+  align-items: center;
+  width: 100%;
+  height: calc(100% - 4vh); /* Adjust height relative to the parent */
+  background-color: var(--cs-light-blue);
+  overflow: hidden; /* Ensure child elements do not overflow */
+}
+
+.topic-menu-tab {
+  display: flex;
+  width: 100%;
+  height: 12.5%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: var(--cs-light-blue);
+  border-bottom: 2px solid var(--cs-black);
+  color: var(--cs-black);
+  font-family: 'Exo 2', sans-serif;
+  font-size: 1rem;
+  text-align: center;
+  flex-direction: column;
+}

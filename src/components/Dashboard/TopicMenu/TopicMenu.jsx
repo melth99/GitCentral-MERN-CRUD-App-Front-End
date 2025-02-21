@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { UserContext } from '../../contexts/UserContext';
+import { UserContext } from '../../../contexts/UserContext';
 import './TopicMenu.css';
 
 const TopicMenu = () => {
@@ -37,7 +37,7 @@ const TopicMenu = () => {
         </div>
       </div>
       <div id="topic-menu-container">
-        <div id="topic-menu-title">Topic Title</div>
+        <div id="topic-menu-title">'topic title' repo discussion</div>
         <div id="topic-menu-menu">
           <div className="topic-menu-tab">
             <a href="#" className="topic-menu-item">Topic 1</a>

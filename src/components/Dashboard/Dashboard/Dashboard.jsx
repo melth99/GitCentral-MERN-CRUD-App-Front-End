@@ -1,10 +1,10 @@
 // src/components/Dashboard/Dashboard.jsx
 
 import { useEffect, useContext } from 'react';
-import { UserContext } from '../../contexts/UserContext';
-import * as userService from '../../services/userService';
+import { UserContext } from '../../../contexts/UserContext';
+import * as userService from '../../../services/userService';
 import './Dashboard.css';
-import TopicBoard from './TopicBoard';
+import TopicBoard from '../TopicBoard/TopicBoard';
 
 const Dashboard = () => {
   const { user } = useContext(UserContext);
