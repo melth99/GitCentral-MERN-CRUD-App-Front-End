@@ -5,6 +5,7 @@ import { UserContext } from '../../../contexts/UserContext';
 import * as userService from '../../../services/userService';
 import './Dashboard.css';
 import TopicBoard from '../TopicBoard/TopicBoard';
+import ProfilePage from '../ProfilePage/ProfilePage';
 
 const Dashboard = () => {
   const { user } = useContext(UserContext);
@@ -31,6 +32,7 @@ const Dashboard = () => {
   return (
     <div>
     <TopicBoard />
+    {/* <ProfilePage /> */}
     </div>
   );
 };

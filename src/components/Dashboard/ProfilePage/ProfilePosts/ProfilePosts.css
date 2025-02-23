@@ -1,0 +1,78 @@
+#my-posts-container {
+  display: flex;
+  justify-content: flex-start;
+  margin: 2vh auto;
+  width: 50%;
+  height: 90%;
+  align-items: flex-start;
+  flex-direction: column;
+  border: solid var(--cs-light-blue);
+  border-width: 4px; 
+  border-radius: 10px;
+}
+
+#my-posts-title {
+  font-size: 24px;
+  color: var(--cs-white);
+  padding: 10px;
+  margin: 0 auto;
+  width: 100%;
+  border-bottom: solid var(--cs-light-blue); 
+  border-width: 2px;
+  text-align: center;
+}
+
+#my-posts-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.my-posts-menu-tab {
+  display: flex;
+  font-size: 18px;
+  margin: 0 10px;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: solid var(--cs-light-blue);
+  border-width: 2px;
+}
+
+.my-posts-menu-item {
+  font-size: 18px;
+  color: var(--cs-white);
+  margin: 0 10px;
+  cursor: pointer;
+}
+.my-posts-menu-tab > div {
+  display: flex;
+  align-items: center; /* Center vertically */
+}
+
+.my-posts-menu-edit-button {
+  font-size: 18px;
+  color: var(--cs-black);
+  background-color: var(--cs-light-blue);
+  border: solid var(--cs-light-blue);
+  border-width: 2px;
+  padding: 5px 10px;
+  border-radius: 15px;
+}
+
+.my-posts-menu-delete-button {
+  font-size: 18px;
+  color: var(--cs-black);
+  background-color: var(--cs-light-blue);
+  border: solid var(--cs-light-blue);
+  border-width: 2px;
+  padding: 5px 8px;
+  margin-right: 1vh;
+  margin-left: 1vh;
+  border-radius: 15px;
+}

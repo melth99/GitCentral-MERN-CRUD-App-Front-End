@@ -14,10 +14,10 @@ const ForumDropdown = ({ availableForums }) => {
   return (
     <div className="forum-dropdown-container">
       <ForumDropdownButton onClick={handleDropdownButtonClick} />
-      <ForumDropdownContent 
+      {isDropdownVisible && <ForumDropdownContent 
         availableForums={availableForums} 
-        isVisible={isDropdownVisible} 
-      />
+      />}
+
     </div>
   );
 };

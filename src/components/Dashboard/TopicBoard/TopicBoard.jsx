@@ -2,9 +2,9 @@ import React, { useContext, useState, useRef, useEffect } from 'react';
 import { UserContext } from '../../../contexts/UserContext';
 import './TopicBoard.css';
 import TopicMenu from '../TopicMenu/TopicMenu';
-import PostMenu from '../PostMenu/PostMenu';
-import NewPost from '../NewPost/NewPost';
-import ForumDropdown from '../ForumDropdown/ForumDropdown';
+import PostMenu from '../ViewPost/PostMenu';
+import NewPost from '../NewPost/NewPost/NewPost';
+import ForumDropdown from '../NewPost/ForumDropdown/ForumDropdown';
 
 
 

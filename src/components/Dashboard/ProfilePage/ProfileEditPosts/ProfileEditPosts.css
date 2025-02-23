@@ -1,0 +1,51 @@
+.profile-post-body {
+  width: 100%;
+  height: 75%;
+}
+
+.profile-post-body textarea.profile-new-post-body {
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: var(--cs-black);
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  color: var(--cs-white);
+  min-height: 150px;
+  resize: none; 
+  overflow-y: auto; 
+}
+
+.profile-post-body textarea.profile-new-post-body::placeholder {
+  color: #aaa;
+}
+
+.profile-post-body textarea.profile-new-post-body:focus {
+  outline: none;
+  border-color: var(--cs-primary);
+}
+
+.my-posts-buttons-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  margin: 2vh auto;
+  width: 100%;
+  gap: 20px; 
+}
+
+.my-posts-menu-edit, 
+.my-posts-menu-cancel {
+  font-size: 18px;
+  color: var(--cs-black);
+  background-color: var(--cs-light-blue);
+  border: solid var(--cs-light-blue);
+  border-width: 2px;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: fit-content; 
+  margin-top: 1.5vh;
+}

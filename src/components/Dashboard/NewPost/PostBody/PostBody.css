@@ -1,0 +1,26 @@
+.post-body {
+  width: 100%;
+}
+
+.post-body textarea.new-post-body {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: var(--cs-black);
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  color: var(--cs-white);
+  min-height: 150px;
+  resize: none; 
+  overflow-y: auto; 
+}
+
+.post-body textarea.new-post-body::placeholder {
+  color: #aaa;
+}
+
+.post-body textarea.new-post-body:focus {
+  outline: none;
+  border-color: var(--cs-primary);
+}

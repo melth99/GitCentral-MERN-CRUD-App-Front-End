@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#profile-page-container {
+  display: flex;
+  margin-top: 0;
+  margin-left: 15px;
+  margin-right: 15px;
+  border-radius: 20px;
+  flex-direction: column; /* Allow vertical stacking of elements */
+  justify-content: flex-start; /* Align items to the top */ /* Stretch items to fill the container */
+  background-color: var(--cs-black);
+  height: 96vh; /* Full height of the viewport */
+  border: 5px solid var(--cs-light-blue);
+}
+
+#profile-page-body {
+  display: flex;
+  margin: 10px 10px 0 10px;
+  margin-bottom: 0;
+  border-radius: 10px;
+  flex-direction: column; /* Allow vertical stacking of elements */
+  justify-content: flex-start; /* Align items to the top */
+  align-items: stretch; /* Stretch items to fill the container */
+  background-color: var(--cs-black);
+  position: relative;
+  overflow-y: auto; /* Enable vertical scrolling */
+  height: calc(100vh - 8vh); /* Full height minus the navbar */
+}
+
+#profile-page-header {
+  height: 50vh;
+}
+
+#profile-page-image-container {
+  width: 20vh;
+  height: 20vh;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-top: 2vh;
+  text-align: center;
+  display: flex;
+  align-items: center; /* Center the image vertically */
+  justify-content: center; /* Center the image horizontally */
+  overflow: hidden; /* Hide any overflow content */
+}
+
+#profile-page-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the circular area */
+  border-radius: 50%;
+}
+
+#profile-page-user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2vh;
+  font-size: 1.5rem;
+  color: var(--cs-white);
+}
