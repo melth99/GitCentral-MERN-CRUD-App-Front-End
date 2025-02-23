@@ -1,9 +1,10 @@
 import React from 'react';
+import './ForumDropdownButton.css';
 
 const ForumDropdownButton = ({ onClick }) => {
   return (
     <button onClick={onClick} className="select-forum-button">
-      forum name &#8595;
+      Current Forum &#8595;
     </button>
   );
 };

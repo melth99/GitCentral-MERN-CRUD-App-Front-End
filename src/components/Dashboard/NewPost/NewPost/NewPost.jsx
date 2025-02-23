@@ -1,7 +1,12 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
-import { UserContext } from '../../../contexts/UserContext';
+import { UserContext } from '../../../../contexts/UserContext';
 import ForumDropdown from '../ForumDropdown/ForumDropdown';
+import PostTitle from '../PostTitle/PostTitle';
+import PostBody from '../PostBody/PostBody';
 import './NewPost.css';
+import PostNav from '../PostNav/PostNav';
+import PostSubmission from '../PostSubmission/PostSubmission';
+
 
 const NewPost = () => {
   const { user } = useContext(UserContext);
@@ -38,23 +43,15 @@ const NewPost = () => {
   }, []);
 
   return (
-    <div
-      id="new-post-container"
-      ref={dropdownRef}
-    >
+    <div id="new-post-container" ref={dropdownRef}>
       <h1 id="post-heading">Create a New Post</h1>
       <ForumDropdown availableForums={availableForums} />
+      <PostNav />
       {isEditing && (
-        <div className="post-title">
-          <input
-            type="text"
-            value={inputValue}
-            onChange={handleInputChange}
-            className="new-post-title"
-            placeholder="Title*"
-          />
-        </div>
+        <PostTitle inputValue={inputValue} handleInputChange={handleInputChange} />
       )}
+      <PostBody />
+      <PostSubmission />
     </div>
   );
 };

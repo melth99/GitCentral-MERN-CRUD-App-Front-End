@@ -1,0 +1,23 @@
+.post-title {
+  width: 100%;
+}
+
+.post-title input.new-post-title {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: var(--cs-black);
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  color: var(--cs-white);
+}
+
+.post-title input.new-post-title::placeholder {
+  color: #aaa;
+}
+
+.post-title input.new-post-title:focus {
+  outline: none;
+  border-color: var(--cs-primary);
+}

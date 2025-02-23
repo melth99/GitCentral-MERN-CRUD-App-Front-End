@@ -1,0 +1,31 @@
+.forum-dropdown-container {
+  display: flex;
+  margin-bottom: 1.5vh;
+}
+
+.forum-dropdown-content {
+  position: absolute; /* Position below the button with a small gap */
+  left: 2vw;
+  z-index: 2; /* Ensure the dropdown is above other content */
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  background-color: rgba(0, 0, 0, 1); /* Full opacity */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 10%;
+  margin-left: 3%;
+}
+
+.dropdown-item {
+  padding: 10px;
+  text-decoration: none;
+  color: var(--cs-white);
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: var(--cs-black);
+}

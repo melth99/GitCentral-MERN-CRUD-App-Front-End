@@ -1,0 +1,28 @@
+.profile-nav {
+  display: flex;
+  margin: 0 auto;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 1.2rem;
+  width: 30%;
+  height: 2rem;
+  justify-content: space-evenly;
+}
+
+.profile-nav-item {
+  color: var(--cs-white);
+  text-decoration: none;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  border-radius: 20px;
+  padding: 5px 20px;
+  box-sizing: border-box;
+}
+
+.profile-nav-item:hover {
+  color: var(--cs-black);
+  background-color: var(--cs-white);
+}
+
+.profile-nav-item.active {
+  color: var(--cs-black);
+  background-color: var(--cs-white);
+}
