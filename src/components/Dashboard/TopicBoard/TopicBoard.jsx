@@ -5,22 +5,37 @@ import TopicMenu from '../TopicMenu/TopicMenu';
 import PostMenu from '../ViewPost/PostMenu';
 import NewPost from '../NewPost/NewPost/NewPost';
 import ForumDropdown from '../NewPost/ForumDropdown/ForumDropdown';
-
-
+import { useParams } from 'react-router-dom';
 
 const TopicBoard = () => {
+  const { topicId } = useParams();
   const { user } = useContext(UserContext);
   const [showNewPost, setShowNewPost] = useState(false);
+  const [topicData, setTopicData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const newPostRef = useRef(null);
 
-  // Sample data for available forums
-  const availableForums = ['Forum 1', 'Forum 2', 'Forum 3', 'Forum 4'];
+  useEffect(() => {
+    const fetchTopicData = async () => {
+      try {
+        setLoading(true);
+        // Replace this with your actual API call
+        const response = await fetch(`/api/topics/${topicId}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch topic data');
+        }
+        const data = await response.json();
+        setTopicData(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const handleClickOutside = (event) => {
-    if (newPostRef.current && !newPostRef.current.contains(event.target)) {
-      setShowNewPost(false);
-    }
-  };
+    fetchTopicData();
+  }, [topicId]);
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
@@ -29,21 +44,30 @@ const TopicBoard = () => {
     };
   }, []);
 
+  const handleClickOutside = (event) => {
+    if (newPostRef.current && !newPostRef.current.contains(event.target)) {
+      setShowNewPost(false);
+    }
+  };
+
   const handleButtonClick = () => {
     setShowNewPost(true);
   };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div id="dash-container">
       <main id="dash-body">
         <div id="topic-board">
           <div className="image-container">
-            <img alt="" onError={(e) => e.target.style.display = 'none'} />
+            <img src={topicData.imageUrl} alt="" onError={(e) => e.target.style.display = 'none'} />
           </div>
           <div id="topic-info">
-            <h1 id="topic-board-title">Topic-title</h1>
+            <h1 id="topic-board-title">{topicData.title}</h1>
             <div className="buttons-container">
-              <button className="follow-button">followers: ___</button>
+              <button className="follow-button">followers: {topicData.followers}</button>
               {!showNewPost && (
                 <button onClick={handleButtonClick} className="new-post-button">
                   create a post
@@ -52,13 +76,13 @@ const TopicBoard = () => {
             </div>
             {showNewPost && (
               <div ref={newPostRef}>
-                <NewPost />
+                <NewPost topicId={topicId} />
               </div>
             )}
           </div>
         </div>
-        <TopicMenu />
-        {/* <PostMenu /> */}
+        <TopicMenu topicId={topicId} />
+        <PostMenu topicId={topicId} />
       </main>
     </div>
   );

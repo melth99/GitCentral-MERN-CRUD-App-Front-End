@@ -30,24 +30,31 @@ nav::before {
   align-items: center;
 }
 
+.site-logo-container a {
+  text-decoration: none;
+}
+
 .site-name {
   display: flex;
   align-items: center;
   font-size: 2.5rem;
   font-weight: bold;
   margin-left: 1vw;
+  text-decoration: none;
 }
 
 .site-name-front {
   color: var(--cs-light-blue);
   font-size: 2.5rem;
   font-weight: bold;
+  text-decoration: none;
 }
 
 .site-name-back {
   color: var(--cs-white);
   font-size: 2.5rem;
   font-weight: bold;
+  text-decoration: none;
 }
 
 #site-slogan {
@@ -58,9 +65,9 @@ nav::before {
 }
 
 .nav-links {
-  display: flex; 
+  display: flex;
   padding: 0;
-  margin: 0; 
+  margin: 0;
 }
 
 .nav-links ul {
@@ -71,7 +78,7 @@ nav::before {
 }
 
 .nav-links li {
-  margin-right: 1rem; 
+  margin-right: 1rem;
   list-style: none;
 }
 

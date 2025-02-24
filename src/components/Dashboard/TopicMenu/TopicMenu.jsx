@@ -11,28 +11,28 @@ const TopicMenu = () => {
         <div id="hot-topic-title">Hot Topics</div>
         <div id="hot-topic-menu">
           <div className="hot-topic-menu-tab">
-            <a href="#" className="hot-topic-menu-item">Topic 1</a>
+            <a href="#" className="hot-topic-menu-item">AI and Machine Learning</a>
           </div>
           <div className="hot-topic-menu-tab">
-            <a href="#" className="hot-topic-menu-item">Topic 2</a>
+            <a href="#" className="hot-topic-menu-item">Browser Extensions</a>
           </div>
           <div className="hot-topic-menu-tab">
-            <a href="#" className="hot-topic-menu-item">Topic 3</a>
+            <a href="#" className="hot-topic-menu-item">Tools and Frameworks</a>
           </div>
           <div className="hot-topic-menu-tab">
-            <a href="#" className="hot-topic-menu-item">Topic 4</a>
+            <a href="#" className="hot-topic-menu-item">Cross-Platform Dev.</a>
           </div>
           <div className="hot-topic-menu-tab">
-            <a href="#" className="hot-topic-menu-item">Topic 5</a>
+            <a href="#" className="hot-topic-menu-item">Learning Resources</a>
           </div>
           <div className="hot-topic-menu-tab">
-            <a href="#" className="hot-topic-menu-item">Topic 6</a>
+            <a href="#" className="hot-topic-menu-item">Hobby Projects</a>
           </div>
           <div className="hot-topic-menu-tab">
-            <a href="#" className="hot-topic-menu-item">Topic 7</a>
+            <a href="#" className="hot-topic-menu-item">Open Source AI</a>
           </div>
           <div className="hot-topic-menu-tab">
-            <a href="#" className="hot-topic-menu-item">Topic 8</a>
+            <a href="#" className="hot-topic-menu-item">Software Collab.</a>
           </div>
         </div>
       </div>
