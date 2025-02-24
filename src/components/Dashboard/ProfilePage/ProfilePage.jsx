@@ -1,14 +1,20 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { UserContext } from '../../../contexts/UserContext';
-import './ProfilePage.css'
+import './ProfilePage.css';
 import ProfileMain from './ProfileMain/ProfileMain';
 
 const ProfilePage = () => {
-  return ( 
-    <>
-    <ProfileMain />
-    </>
-  )
+  const { user } = useContext(UserContext);
+
+  if (!user) {
+    return <div>Please sign in to view your profile.</div>;
   }
 
-  export default ProfilePage;
+  return (
+    <div className="profile-page">
+      <ProfileMain />
+    </div>
+  );
+};
+
+export default ProfilePage;

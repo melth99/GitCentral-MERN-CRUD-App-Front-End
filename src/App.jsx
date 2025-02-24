@@ -6,7 +6,8 @@ import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
 import Dashboard from './components/Dashboard/Dashboard/Dashboard';
 import Landing from './components/Landing/Landing';
-
+import ProfilePage from './components/Dashboard/ProfilePage/ProfilePage';
+import TopicBoard from './components/Dashboard/TopicBoard/TopicBoard'; // Add this line
 import { UserContext } from './contexts/UserContext';
 
 const App = () => {
@@ -19,6 +20,9 @@ const App = () => {
         <Route path='/' element={user ? <Dashboard /> : <Landing />} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
+        <Route path='/profile' element={<ProfilePage />} />
+        <Route path='/topics/:topicId' element={<TopicBoard />} />
+        <Route path="/profile/*" element={<ProfilePage />} />
       </Routes> 
     </>
   );
