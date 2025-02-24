@@ -23,6 +23,7 @@ const App = () => {
         <Route path='/sign-in' element={<SignInForm />} />
         <Route path='/profile' element={<ProfilePage />} />
         <Route path='/topics/:topicId' element={<TopicBoard />} />
+        <Route path="/profile/*" element={<ProfilePage />} />
       </Routes> 
     </>
   );
