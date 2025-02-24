@@ -4,6 +4,7 @@ import './TopicBoard.css';
 import TopicMenu from '../TopicMenu/TopicMenu';
 import PostMenu from '../ViewPost/PostMenu';
 import NewPost from '../NewPost/NewPost/NewPost';
+import PostSubmission from '../NewPost/PostSubmission/PostSubmission';
 import { useParams } from 'react-router-dom';
 
 const TopicBoard = () => {
@@ -11,6 +12,7 @@ const TopicBoard = () => {
   const { user } = useContext(UserContext);
   const [showNewPost, setShowNewPost] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState(null);
+  const [selectedTopicName, setSelectedTopicName] = useState(null);
   const [topicData, setTopicData] = useState({
     title: "Mock Topic Title",
     imageUrl: "https://via.placeholder.com/150",
@@ -34,8 +36,9 @@ const TopicBoard = () => {
     setShowNewPost(true);
   };
 
-  const handleTopicSelect = (topicId) => {
+  const handleTopicSelect = (topicId, topicName) => {
     setSelectedTopic(topicId);
+    setSelectedTopicName(topicName);
   };
 
   return (
@@ -62,7 +65,15 @@ const TopicBoard = () => {
             )}
           </div>
         </div>
-        {selectedTopic ? <PostMenu topicId={selectedTopic} /> : <TopicMenu onTopicSelect={handleTopicSelect} />}
+        {selectedTopic ? (
+          <PostMenu 
+            topicId={selectedTopic} 
+            topicName={selectedTopicName} 
+            submitButton={PostSubmission} 
+          />
+        ) : (
+          <TopicMenu onTopicSelect={handleTopicSelect} submitButton={PostSubmission} />
+        )}
       </main>
     </div>
   );

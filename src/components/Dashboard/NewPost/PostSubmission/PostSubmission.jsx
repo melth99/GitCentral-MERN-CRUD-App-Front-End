@@ -1,7 +1,7 @@
 import React from 'react';
 import './PostSubmission.css';
 
-const PostSubmission = () => {
+const PostSubmission = ({ bodyValue, handleBodyChange, inputValue, handleInputChange }) => {
   return (
     <button id="submit-post-button">Submit</button>
   )}

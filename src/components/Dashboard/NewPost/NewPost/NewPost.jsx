@@ -12,6 +12,9 @@ const NewPost = () => {
   const { user } = useContext(UserContext);
   const [isEditing, setIsEditing] = useState(true); // Start with editing enabled
   const [inputValue, setInputValue] = useState('');
+  const [bodyValue, setBodyValue] = useState('');
+  const [allPosts, setAllPosts] = useState([]);
+  const [allForums, setAllForums] = useState([]);
   const dropdownRef = useRef(null);
 
   const availableForums = [
@@ -24,6 +27,16 @@ const NewPost = () => {
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
+
+  const handleBodyChange = (e) => {
+    setBodyValue(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Submitted');
+    setAllPosts ([...allPosts, { title: inputValue, body: bodyValue }]);
+  }
 
   const handleClickOutside = (event) => {
     if (
@@ -48,10 +61,15 @@ const NewPost = () => {
       <ForumDropdown availableForums={availableForums} />
       <PostNav />
       {isEditing && (
+        // <form className='new-post-form' onSubmit={handleSubmit}>
         <PostTitle inputValue={inputValue} handleInputChange={handleInputChange} />
       )}
-      <PostBody />
-      <PostSubmission />
+      <PostBody bodyValue={bodyValue} handleBodyChange={handleBodyChange}/>
+      <PostSubmission 
+      bodyValue={bodyValue} handleBodyChange={handleBodyChange}
+      inputValue={inputValue} handleInputChange={handleInputChange}
+      handleSubmit={handleSubmit}
+      />
     </div>
   );
 };

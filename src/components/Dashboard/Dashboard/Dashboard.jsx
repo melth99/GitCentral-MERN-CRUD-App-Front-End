@@ -32,7 +32,6 @@ const Dashboard = () => {
   return (
     <div>
     <TopicBoard />
-    {/* <ProfilePage /> */}
     </div>
   );
 };
