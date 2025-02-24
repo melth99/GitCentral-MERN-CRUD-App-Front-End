@@ -8,7 +8,6 @@ import Dashboard from './components/Dashboard/Dashboard/Dashboard';
 import Landing from './components/Landing/Landing';
 import ProfilePage from './components/Dashboard/ProfilePage/ProfilePage';
 import TopicBoard from './components/Dashboard/TopicBoard/TopicBoard'; // Add this line
-
 import { UserContext } from './contexts/UserContext';
 
 const App = () => {

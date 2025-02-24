@@ -4,58 +4,39 @@ import './TopicBoard.css';
 import TopicMenu from '../TopicMenu/TopicMenu';
 import PostMenu from '../ViewPost/PostMenu';
 import NewPost from '../NewPost/NewPost/NewPost';
-import ForumDropdown from '../NewPost/ForumDropdown/ForumDropdown';
 import { useParams } from 'react-router-dom';
 
 const TopicBoard = () => {
   const { topicId } = useParams();
   const { user } = useContext(UserContext);
   const [showNewPost, setShowNewPost] = useState(false);
-  const [topicData, setTopicData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [selectedTopic, setSelectedTopic] = useState(null);
+  const [topicData, setTopicData] = useState({
+    title: "Mock Topic Title",
+    imageUrl: "https://via.placeholder.com/150",
+    followers: 123,
+  });
   const newPostRef = useRef(null);
 
   useEffect(() => {
-    const fetchTopicData = async () => {
-      try {
-        setLoading(true);
-        // Replace this with your actual API call
-        const response = await fetch(`/api/topics/${topicId}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch topic data');
-        }
-        const data = await response.json();
-        setTopicData(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
+    const handleClickOutside = (event) => {
+      if (newPostRef.current && !newPostRef.current.contains(event.target)) {
+        setShowNewPost(false);
       }
     };
-
-    fetchTopicData();
-  }, [topicId]);
-
-  useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
-  const handleClickOutside = (event) => {
-    if (newPostRef.current && !newPostRef.current.contains(event.target)) {
-      setShowNewPost(false);
-    }
-  };
-
   const handleButtonClick = () => {
     setShowNewPost(true);
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  const handleTopicSelect = (topicId) => {
+    setSelectedTopic(topicId);
+  };
 
   return (
     <div id="dash-container">
@@ -81,8 +62,7 @@ const TopicBoard = () => {
             )}
           </div>
         </div>
-        <TopicMenu topicId={topicId} />
-        <PostMenu topicId={topicId} />
+        {selectedTopic ? <PostMenu topicId={selectedTopic} /> : <TopicMenu onTopicSelect={handleTopicSelect} />}
       </main>
     </div>
   );

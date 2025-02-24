@@ -83,6 +83,7 @@
   font-weight: bold;
   justify-content: flex-end;
   align-items: center;
+  cursor: pointer; /* Add this line */
 }
 
 .topic-menu-item {
@@ -96,6 +97,7 @@
   text-decoration: underline;
   color: var(--cs-red);
   font-weight: bold;
+  cursor: pointer; /* Add this line */
 }
 
 .topic-menu-user {
@@ -108,7 +110,9 @@
   font-size: .8rem;
   text-decoration: underline;
   color: var(--cs-black);
+  cursor: pointer; /* Add this line */
 }
+
 
 /* Adjustments for the topic menu container */
 #topic-menu-container {
