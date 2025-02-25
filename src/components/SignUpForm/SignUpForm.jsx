@@ -11,7 +11,7 @@ import { signUp } from '../../../services/authService';
 
 import "./SignUpForm.css"
 
-const SignUpForm = () => {
+const SignUpForm = () => { //POST REQ - AUTH CONTROLLER
     // navigate is a function that takes in a path
     // we defined on one of our routes
 

@@ -1,8 +1,10 @@
 import React from 'react';
 // import './ForumsList.css'; // Optional: Add styling if needed
+import { useState } from 'react';
 
 const ForumsList = ({ onTopicSelect }) => {
-  const hotTopics = [
+//fetch call needed 
+  const initialState = [/*
     { id: 'ai', name: 'AI and Machine Learning' },
     { id: 'web', name: 'Web Development' },
     { id: 'mobile', name: 'Mobile App Development' },
@@ -11,7 +13,10 @@ const ForumsList = ({ onTopicSelect }) => {
     { id: 'security', name: 'Cybersecurity' },
     { id: 'iot', name: 'Internet of Things' },
     { id: 'blockchain', name: 'Blockchain' },
+    */
+   {}
   ];
+  const [forums,setForums] = useState({initialState})
 
   const handleTopicClick = (topicId, topicName) => {
     onTopicSelect(topicId, topicName);
