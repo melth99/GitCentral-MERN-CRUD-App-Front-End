@@ -96,10 +96,11 @@ const SignUpForm = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="signup">
                     <button disabled={isFormInvalid()}>Sign Up</button>
                     <button onClick={() => navigate('/')}>Cancel</button>
                 </div>
+
             </form>
         </main>
     );

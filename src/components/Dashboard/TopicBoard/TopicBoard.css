@@ -125,6 +125,20 @@
   border: 2px solid var(--cs-black); /* Add border */
 }
 
+.new-forum-button {
+  font-family: 'Dosis', sans-serif; /* Apply Dosis font to the follow button */
+  font-size: 1.2rem; /* Increase the font size */
+  background-color: #88C0D0; /* Default background color */
+  color: #021013; /* Default text color */
+  border: none;
+  border-radius: 20px;
+  padding: 5px 20px;
+  margin-top: 1vh;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for smooth color changes */
+  border: 2px solid var(--cs-black); /* Add border */
+}
+
 .new-post-button:hover {
   background-color: var(--cs-black); /* Hover background color */
   color: #FFFFFF; /* Hover text color */

@@ -1,4 +1,4 @@
-main {
+/* main {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,7 +52,7 @@ main {
     box-shadow: 0px 0px 10px #00ffff;
   }
 
-  button {
+  .signup button {
     width: 100%;
     padding: 12px;
     margin-top: 10px;
@@ -62,27 +62,27 @@ main {
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s ease-in-out;
-  }
+}
 
-  button:disabled {
+.signup button:disabled {
     background: gray;
     cursor: not-allowed;
-  }
+}
 
-  button:first-of-type {
+.signup button:first-of-type {
     background-color: #00ffff;
     color: #000;
-  }
+}
 
-  button:first-of-type:hover {
+.signup button:first-of-type:hover {
     background-color: #008b8b;
-  }
+}
 
-  button:last-of-type {
+.signup button:last-of-type {
     background-color: #ff0000;
     color: #fff;
-  }
+}
 
-  button:last-of-type:hover {
+.signup button:last-of-type:hover {
     background-color: #8b0000;
-  }
+} */

@@ -4,6 +4,7 @@ import './TopicBoard.css';
 import TopicMenu from '../PostMenu/PostMenu';
 import ViewPost from '../ViewPost/ViewPost';
 import NewPost from '../NewPost/NewPost/NewPost';
+import NewForum from '../NewForum/NewForum/NewForum';
 import PostSubmission from '../NewPost/PostSubmission/PostSubmission';
 import { useParams } from 'react-router-dom';
 
@@ -11,6 +12,10 @@ const TopicBoard = () => {
   const { topicId } = useParams();
   const { user } = useContext(UserContext);
   const [showNewPost, setShowNewPost] = useState(false);
+  const [showNewForum, setShowNewForum] = useState(false);
+  const [forumList, setForumList] = useState([]);
+  const [editingForum, setEditingForum] = useState(null);
+  const newForumRef = useRef(null);
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [selectedPost, setSelectedPost] = useState(null);
   const [selectedTopicName, setSelectedTopicName] = useState(null);
@@ -20,25 +25,14 @@ const TopicBoard = () => {
     followers: 'unknown',
   });
   const [posts, setPosts] = useState([]);
-  const [editingPost, setEditingPost] = useState(null); // New state for editing
+  const [editingPost, setEditingPost] = useState(null);
   const newPostRef = useRef(null);
-
-  const hotTopics = [
-    { id: 'ai', name: 'AI and Machine Learning' },
-    { id: 'web', name: 'Web Development' },
-    { id: 'mobile', name: 'Mobile App Development' },
-    { id: 'data', name: 'Data Science' },
-    { id: 'cloud', name: 'Cloud Computing' },
-    { id: 'security', name: 'Cybersecurity' },
-    { id: 'iot', name: 'Internet of Things' },
-    { id: 'blockchain', name: 'Blockchain' },
-  ];
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (newPostRef.current && !newPostRef.current.contains(event.target)) {
         setShowNewPost(false);
-        setEditingPost(null); // Reset editing state when closing
+        setEditingPost(null);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -49,8 +43,13 @@ const TopicBoard = () => {
 
   const handleButtonClick = () => {
     setShowNewPost(true);
-    setEditingPost(null); // Ensure it's a new post, not an edit
+    setEditingPost(null);
   };
+
+  const handleForumButtonClick = () => {
+    setShowNewForum(true);
+    setEditingForum(null);
+  }
 
   const handleTopicSelect = (id, name, isPost = false) => {
     if (isPost) {
@@ -68,14 +67,12 @@ const TopicBoard = () => {
 
   const handleNewPostSubmit = (postData) => {
     if (editingPost) {
-      // Update existing post
       setPosts((prevPosts) =>
         prevPosts.map((post) =>
           post.id === editingPost.id ? { ...post, ...postData } : post
         )
       );
     } else {
-      // Add new post
       const newPost = {
         ...postData,
         id: Date.now().toString(),
@@ -89,12 +86,16 @@ const TopicBoard = () => {
 
   const handleDeletePost = (postId) => {
     setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
-    setSelectedPost(null); // Clear selection if deleted post was selected
+    setSelectedPost(null);
   };
 
   const handleEditPost = (post) => {
     setEditingPost(post);
     setShowNewPost(true);
+  };
+
+  const handleNewForumSubmit = (forumData) => {
+    // Implement forum submission logic here
   };
 
   return (
@@ -117,19 +118,35 @@ const TopicBoard = () => {
                   create a post
                 </button>
               )}
+              {!showNewForum && (
+                <button onClick={handleForumButtonClick} className="new-forum-button">
+                  create a forum
+                </button>
+              )}
             </div>
-            {showNewPost && (
-              <div ref={newPostRef}>
-                <NewPost
-                  topicId={selectedTopic || topicId}
-                  selectedTopicName={selectedTopicName}
-                  availableTopics={hotTopics}
-                  onSubmit={handleNewPostSubmit}
-                  editingPost={editingPost} // Pass the post being edited
+            {showNewForum && (
+              <div ref={newForumRef}>
+                <NewForum
+                onTopicSelect={handleTopicSelect}
+                onClose={() => setShowNewForum(false)}
+                  forumList={forumList}
+                  onSubmit={handleNewForumSubmit}
+                  editingForum={editingForum}
                 />
               </div>
             )}
           </div>
+          {showNewPost && (
+            <div ref={newPostRef}>
+              <NewPost
+                topicId={selectedTopic || topicId}
+                selectedTopicName={selectedTopicName}
+                availableTopics={forumList}
+                onSubmit={handleNewPostSubmit}
+                editingPost={editingPost}
+              />
+            </div>
+          )}
         </div>
         {selectedPost ? (
           <ViewPost
@@ -146,8 +163,8 @@ const TopicBoard = () => {
             posts={posts}
             topicName={selectedTopicName}
             selectedTopic={selectedTopic}
-            onDeletePost={handleDeletePost} // Pass delete handler
-            onEditPost={handleEditPost}     // Pass edit handler
+            onDeletePost={handleDeletePost}
+            onEditPost={handleEditPost}
           />
         )}
       </main>
