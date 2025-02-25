@@ -3,7 +3,7 @@ import { UserContext } from '../../../contexts/UserContext';
 import './PostMenu.css';
 import ForumsList from '../ForumsList/ForumsList';
 
-const PostMenu = ({ onTopicSelect, posts, topicName, selectedTopic }) => {
+const PostMenu = ({ onTopicSelect, posts, topicName, selectedTopic, onDeletePost, onEditPost }) => {
   const { user } = useContext(UserContext);
 
   // Filter posts to only show those matching the selected topic
@@ -40,6 +40,18 @@ const PostMenu = ({ onTopicSelect, posts, topicName, selectedTopic }) => {
                 >
                   {post.username || 'Anonymous'}
                 </a>
+                <button
+                  id="edit-button"
+                  onClick={() => onEditPost(post)} // Trigger edit handler
+                >
+                  Edit
+                </button>
+                <button
+                  id="delete-button"
+                  onClick={() => onDeletePost(post.id)} // Trigger delete handler
+                >
+                  Delete
+                </button>
               </div>
             ))
           ) : (

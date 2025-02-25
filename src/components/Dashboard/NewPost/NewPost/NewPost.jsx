@@ -7,18 +7,18 @@ import './NewPost.css';
 import PostNav from '../PostNav/PostNav';
 import PostSubmission from '../PostSubmission/PostSubmission';
 
-const NewPost = ({ topicId, onSubmit, selectedTopicName, availableTopics }) => {
+const NewPost = ({ topicId, onSubmit, selectedTopicName, availableTopics, editingPost }) => {
   const { user } = useContext(UserContext);
   const [isEditing, setIsEditing] = useState(true);
-  const [inputValue, setInputValue] = useState('');
-  const [bodyValue, setBodyValue] = useState('');
+  const [inputValue, setInputValue] = useState(editingPost ? editingPost.title : '');
+  const [bodyValue, setBodyValue] = useState(editingPost ? editingPost.body : '');
   const [selectedTopic, setSelectedTopic] = useState(
     availableTopics.find((topic) => topic.name === selectedTopicName) || null
-  ); // Initialize with current topic
+  );
   const dropdownRef = useRef(null);
 
-  console.log('NewPost - selectedTopic:', selectedTopic); // Debug log
-  console.log('NewPost - availableTopics:', availableTopics); // Debug log
+  console.log('NewPost - selectedTopic:', selectedTopic);
+  console.log('NewPost - availableTopics:', availableTopics);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -34,12 +34,12 @@ const NewPost = ({ topicId, onSubmit, selectedTopicName, availableTopics }) => {
       const newPost = {
         title: inputValue,
         body: bodyValue,
-        topicId: selectedTopic ? selectedTopic.id : topicId, // Use selected topic ID
+        topicId: selectedTopic ? selectedTopic.id : topicId,
       };
       onSubmit(newPost);
       setInputValue('');
       setBodyValue('');
-      setSelectedTopic(null); // Reset after submit (optional)
+      setSelectedTopic(null);
     }
   };
 
@@ -62,11 +62,11 @@ const NewPost = ({ topicId, onSubmit, selectedTopicName, availableTopics }) => {
 
   return (
     <div id="new-post-container" ref={dropdownRef}>
-      <h1 id="post-heading">Create a New Post</h1>
+      <h1 id="post-heading">{editingPost ? 'Edit Post' : 'Create a New Post'}</h1>
       <ForumDropdown
-        availableTopics={availableTopics} // Pass topics instead of forums
+        availableTopics={availableTopics}
         selectedTopicName={selectedTopic ? selectedTopic.name : selectedTopicName}
-        setSelectedTopic={setSelectedTopic} // Update to set topic object
+        setSelectedTopic={setSelectedTopic}
       />
       <PostNav />
       {isEditing && (
