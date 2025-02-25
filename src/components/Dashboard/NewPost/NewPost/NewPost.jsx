@@ -7,22 +7,18 @@ import './NewPost.css';
 import PostNav from '../PostNav/PostNav';
 import PostSubmission from '../PostSubmission/PostSubmission';
 
-
-const NewPost = () => {
+const NewPost = ({ topicId, onSubmit, selectedTopicName, availableTopics }) => {
   const { user } = useContext(UserContext);
-  const [isEditing, setIsEditing] = useState(true); // Start with editing enabled
+  const [isEditing, setIsEditing] = useState(true);
   const [inputValue, setInputValue] = useState('');
   const [bodyValue, setBodyValue] = useState('');
-  const [allPosts, setAllPosts] = useState([]);
-  const [allForums, setAllForums] = useState([]);
+  const [selectedTopic, setSelectedTopic] = useState(
+    availableTopics.find((topic) => topic.name === selectedTopicName) || null
+  ); // Initialize with current topic
   const dropdownRef = useRef(null);
 
-  const availableForums = [
-    'Forum 1',
-    'Forum 2',
-    'Forum 3',
-    'Forum 4',
-  ];
+  console.log('NewPost - selectedTopic:', selectedTopic); // Debug log
+  console.log('NewPost - availableTopics:', availableTopics); // Debug log
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -34,9 +30,18 @@ const NewPost = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submitted');
-    setAllPosts ([...allPosts, { title: inputValue, body: bodyValue }]);
-  }
+    if (inputValue && bodyValue) {
+      const newPost = {
+        title: inputValue,
+        body: bodyValue,
+        topicId: selectedTopic ? selectedTopic.id : topicId, // Use selected topic ID
+      };
+      onSubmit(newPost);
+      setInputValue('');
+      setBodyValue('');
+      setSelectedTopic(null); // Reset after submit (optional)
+    }
+  };
 
   const handleClickOutside = (event) => {
     if (
@@ -44,7 +49,7 @@ const NewPost = () => {
       !dropdownRef.current.contains(event.target) &&
       event.target.id !== 'new-post-container'
     ) {
-      setShowDropdown(false);
+      // No action needed since ForumDropdown handles visibility
     }
   };
 
@@ -58,18 +63,17 @@ const NewPost = () => {
   return (
     <div id="new-post-container" ref={dropdownRef}>
       <h1 id="post-heading">Create a New Post</h1>
-      <ForumDropdown availableForums={availableForums} />
+      <ForumDropdown
+        availableTopics={availableTopics} // Pass topics instead of forums
+        selectedTopicName={selectedTopic ? selectedTopic.name : selectedTopicName}
+        setSelectedTopic={setSelectedTopic} // Update to set topic object
+      />
       <PostNav />
       {isEditing && (
-        // <form className='new-post-form' onSubmit={handleSubmit}>
         <PostTitle inputValue={inputValue} handleInputChange={handleInputChange} />
       )}
-      <PostBody bodyValue={bodyValue} handleBodyChange={handleBodyChange}/>
-      <PostSubmission 
-      bodyValue={bodyValue} handleBodyChange={handleBodyChange}
-      inputValue={inputValue} handleInputChange={handleInputChange}
-      handleSubmit={handleSubmit}
-      />
+      <PostBody bodyValue={bodyValue} handleBodyChange={handleBodyChange} />
+      <PostSubmission handleSubmit={handleSubmit} />
     </div>
   );
 };

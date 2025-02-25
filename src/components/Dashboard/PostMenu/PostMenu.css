@@ -10,7 +10,7 @@
   height: 61vh; /* Adjust the height as needed */
 }
 
-/* Adjustments for the hot topics container */
+/* Adjustments for the forums container */
 #forums-container {
   display: flex;
   flex-direction: column;
@@ -41,7 +41,7 @@
 }
 
 #forums-menu {
-  border-radius: 10px 10px; /* Bottom left and bottom right corners */
+  border-radius: 0 0 10px 10px; /* Bottom left and bottom right corners */
   font-family: 'Orbitron', sans-serif;
   font-size: 1rem;
   color: var(--cs-white);
@@ -54,7 +54,7 @@
   width: 100%;
   height: calc(100% - 4vh); /* Adjust height relative to the parent */
   background-color: var(--cs-light-blue);
-  overflow: hidden; /* Ensure child elements do not overflow */
+  overflow-y: auto; /* Changed from hidden to auto for scrolling */
 }
 
 .forums-menu-tab {
@@ -83,39 +83,11 @@
   font-weight: bold;
   justify-content: flex-end;
   align-items: center;
-  cursor: pointer; /* Add this line */
+  cursor: pointer;
 }
 
-.topic-menu-item {
-  height: 50%;
-  text-align: left;
-  justify-content: center;
-  align-items: center;
-  justify-items: center;
-  padding: .5vh;
-  font-size: .9rem;
-  text-decoration: underline;
-  color: var(--cs-red);
-  font-weight: bold;
-  cursor: pointer; /* Add this line */
-}
-
-.topic-menu-user {
-  height: 50%;
-  text-align: left;
-  justify-content: center;
-  align-items: center;
-  justify-items: center;
-  padding: .5vh;
-  font-size: .8rem;
-  text-decoration: underline;
-  color: var(--cs-black);
-  cursor: pointer; /* Add this line */
-}
-
-
-/* Adjustments for the topic menu container */
-#topic-menu-container {
+/* Adjustments for the post menu container */
+#post-menu-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -133,7 +105,7 @@
   background-position: center;
 }
 
-#topic-menu-title {
+#post-menu-title {
   border-radius: 10px 10px; /* Top left and top right corners */
   background-color: var(--cs-red);
   font-family: 'Orbitron', sans-serif;
@@ -144,8 +116,8 @@
   margin-top: 1vh;
 }
 
-#topic-menu-menu {
-  border-radius: 10px 10px; /* Bottom left and bottom right corners */
+#post-menu-menu {
+  border-radius: 0 0 10px 10px; /* Bottom left and bottom right corners */
   font-family: 'Orbitron', sans-serif;
   font-size: 1rem;
   color: var(--cs-white);
@@ -158,10 +130,10 @@
   width: 100%;
   height: calc(100% - 4vh); /* Adjust height relative to the parent */
   background-color: var(--cs-light-blue);
-  overflow: hidden; /* Ensure child elements do not overflow */
+  overflow-y: auto; /* Changed from hidden to auto for scrolling */
 }
 
-.topic-menu-tab {
+.post-menu-tab {
   display: flex;
   width: 100%;
   height: 12.5%;
@@ -174,4 +146,31 @@
   font-size: 1rem;
   text-align: center;
   flex-direction: column;
+}
+
+.post-menu-item {
+  height: 50%;
+  text-align: left;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  padding: .5vh;
+  font-size: .9rem;
+  text-decoration: underline;
+  color: var(--cs-red);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.post-menu-user {
+  height: 50%;
+  text-align: left;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  padding: .5vh;
+  font-size: .8rem;
+  text-decoration: underline;
+  color: var(--cs-black);
+  cursor: pointer;
 }

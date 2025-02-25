@@ -3,21 +3,30 @@ import ForumDropdownButton from './ForumDropdownButton';
 import ForumDropdownContent from './ForumDropdownContent';
 import './ForumDropdown.css';
 
-
-const ForumDropdown = ({ availableForums }) => {
+const ForumDropdown = ({ availableTopics, selectedTopicName, setSelectedTopic }) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const handleDropdownButtonClick = () => {
-    setIsDropdownVisible(!isDropdownVisible);
+    setIsDropdownVisible((prev) => !prev);
+  };
+
+  const handleTopicSelect = (topic) => {
+    setSelectedTopic(topic); // Set the full topic object
+    setIsDropdownVisible(false);
   };
 
   return (
     <div className="forum-dropdown-container">
-      <ForumDropdownButton onClick={handleDropdownButtonClick} />
-      {isDropdownVisible && <ForumDropdownContent 
-        availableForums={availableForums} 
-      />}
-
+      <ForumDropdownButton
+        onClick={handleDropdownButtonClick}
+        selectedForum={selectedTopicName || 'Select a Topic'} // Display topic name
+      />
+      {isDropdownVisible && (
+        <ForumDropdownContent
+          availableTopics={availableTopics} // Pass topics
+          onTopicSelect={handleTopicSelect}
+        />
+      )}
     </div>
   );
 };
