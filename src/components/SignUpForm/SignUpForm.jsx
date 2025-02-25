@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router';
 // state 
 import { UserContext } from '../../contexts/UserContext';
 
-import { signUp } from '../../services/authService';
+import { signUp } from '../../../services/authService';
 
 const SignUpForm = () => {
     // navigate is a function that takes in a path 
