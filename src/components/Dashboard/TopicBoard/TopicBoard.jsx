@@ -15,14 +15,14 @@ const TopicBoard = () => {
   const [selectedPost, setSelectedPost] = useState(null);
   const [selectedTopicName, setSelectedTopicName] = useState(null);
   const [topicData, setTopicData] = useState({
-    title: 'Mock Topic Title',
+    title: 'Welcome to the Topic Board! Select a topic to get started.',
     imageUrl: 'https://via.placeholder.com/150',
-    followers: 123,
+    followers: 'unknown',
   });
   const [posts, setPosts] = useState([]);
+  const [editingPost, setEditingPost] = useState(null); // New state for editing
   const newPostRef = useRef(null);
 
-  // Define hotTopics here to share with NewPost
   const hotTopics = [
     { id: 'ai', name: 'AI and Machine Learning' },
     { id: 'web', name: 'Web Development' },
@@ -38,6 +38,7 @@ const TopicBoard = () => {
     const handleClickOutside = (event) => {
       if (newPostRef.current && !newPostRef.current.contains(event.target)) {
         setShowNewPost(false);
+        setEditingPost(null); // Reset editing state when closing
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -48,6 +49,7 @@ const TopicBoard = () => {
 
   const handleButtonClick = () => {
     setShowNewPost(true);
+    setEditingPost(null); // Ensure it's a new post, not an edit
   };
 
   const handleTopicSelect = (id, name, isPost = false) => {
@@ -65,13 +67,34 @@ const TopicBoard = () => {
   };
 
   const handleNewPostSubmit = (postData) => {
-    const newPost = {
-      ...postData,
-      id: Date.now().toString(),
-      username: user?.username || 'Anonymous',
-    };
-    setPosts((prevPosts) => [...prevPosts, newPost]);
+    if (editingPost) {
+      // Update existing post
+      setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post.id === editingPost.id ? { ...post, ...postData } : post
+        )
+      );
+    } else {
+      // Add new post
+      const newPost = {
+        ...postData,
+        id: Date.now().toString(),
+        username: user?.username || 'Anonymous',
+      };
+      setPosts((prevPosts) => [...prevPosts, newPost]);
+    }
     setShowNewPost(false);
+    setEditingPost(null);
+  };
+
+  const handleDeletePost = (postId) => {
+    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+    setSelectedPost(null); // Clear selection if deleted post was selected
+  };
+
+  const handleEditPost = (post) => {
+    setEditingPost(post);
+    setShowNewPost(true);
   };
 
   return (
@@ -100,8 +123,9 @@ const TopicBoard = () => {
                 <NewPost
                   topicId={selectedTopic || topicId}
                   selectedTopicName={selectedTopicName}
-                  availableTopics={hotTopics} // Pass the topics list
+                  availableTopics={hotTopics}
                   onSubmit={handleNewPostSubmit}
+                  editingPost={editingPost} // Pass the post being edited
                 />
               </div>
             )}
@@ -119,10 +143,11 @@ const TopicBoard = () => {
         ) : (
           <TopicMenu
             onTopicSelect={handleTopicSelect}
-            submitButton={PostSubmission}
             posts={posts}
             topicName={selectedTopicName}
             selectedTopic={selectedTopic}
+            onDeletePost={handleDeletePost} // Pass delete handler
+            onEditPost={handleEditPost}     // Pass edit handler
           />
         )}
       </main>

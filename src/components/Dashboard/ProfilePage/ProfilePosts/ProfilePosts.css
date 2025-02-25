@@ -63,6 +63,7 @@
   border-width: 2px;
   padding: 5px 10px;
   border-radius: 15px;
+  text-decoration: none;
 }
 
 .my-posts-menu-delete-button {
@@ -75,4 +76,5 @@
   margin-right: 1vh;
   margin-left: 1vh;
   border-radius: 15px;
+  text-decoration: none;
 }

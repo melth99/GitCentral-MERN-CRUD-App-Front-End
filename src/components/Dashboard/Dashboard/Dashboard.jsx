@@ -2,7 +2,7 @@
 
 import { useEffect, useContext } from 'react';
 import { UserContext } from '../../../contexts/UserContext';
-import * as userService from '../../../services/userService';
+import * as userService from '../../../../services/userService';
 import './Dashboard.css';
 import TopicBoard from '../TopicBoard/TopicBoard';
 import ProfilePage from '../ProfilePage/ProfilePage';
