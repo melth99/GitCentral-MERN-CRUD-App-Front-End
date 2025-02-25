@@ -7,6 +7,8 @@ import { signIn } from '../../../services/authService';
 
 import { UserContext } from '../../contexts/UserContext';
 
+import "./SignInForm.css"
+
 const SignInForm = () => {
   const navigate = useNavigate();
 
@@ -38,7 +40,7 @@ const SignInForm = () => {
   };
 
   return (
-    <main>
+    <main className="signin-form">
       <h1>Sign In</h1>
       <p>{message}</p>
       <form autoComplete='off' onSubmit={handleSubmit}>
@@ -76,4 +78,3 @@ const SignInForm = () => {
 };
 
 export default SignInForm;
-
