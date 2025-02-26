@@ -1,15 +1,22 @@
-/* PostMenu.css (unchanged) */
-#post-menu-container {
+/* ForumsList.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Container for ForumsList (30% width) */
+#forums-list-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 70%; /* 70% width as requested */
-  height: 100%;
+  width: 30%; /* 30% width as requested */
+  height: 100%; /* Full height of parent (#bottom-section) */
   border-radius: 10px;
   overflow: hidden;
-  margin-right: 0;
-  margin-left: 0.5vh;
+  margin-left: 0;
   margin-top: 0.5vh;
+  margin-right: 0.5vh;
   position: relative;
   background-color: var(--cs-black);
   background-size: 20vw 30vh;
@@ -17,9 +24,9 @@
   background-position: center;
 }
 
-/* Rest of PostMenu.css remains the same */
-#post-menu-title {
-  border-radius: 10px 10px;
+/* Title styling */
+#forums-list-container h2 {
+  border-radius: 10px 10px 0 0; /* Top left and top right corners */
   background-color: var(--cs-red);
   font-family: 'Orbitron', sans-serif;
   font-size: 1rem;
@@ -29,8 +36,9 @@
   margin-top: 1vh;
 }
 
-#post-menu-menu {
-  border-radius: 0 0 10px 10px;
+/* Menu (list) styling */
+#forums-list-container ul {
+  border-radius: 0 0 10px 10px; /* Bottom left and bottom right corners */
   font-family: 'Orbitron', sans-serif;
   font-size: 1rem;
   color: var(--cs-white);
@@ -41,15 +49,18 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  height: calc(100% - 4vh);
+  height: calc(100% - 4vh); /* Adjust height relative to the parent */
   background-color: var(--cs-light-blue);
-  overflow-y: auto;
+  overflow-y: auto; /* Enable scrolling */
+  padding: 0; /* Remove default padding */
+  list-style: none; /* Remove default list bullets */
 }
 
-.post-menu-tab {
+/* Individual forum item */
+.forum-item {
   display: flex;
   width: 100%;
-  height: 12.5%;
+  height: 12.5%; /* Match PostMenu tab height */
   justify-content: flex-start;
   align-items: flex-start;
   background-color: var(--cs-light-blue);
@@ -61,54 +72,23 @@
   flex-direction: column;
 }
 
-.post-menu-item {
-  height: 50%;
+/* Forum link */
+.forum-item a {
+  height: 100%; /* Full height of tab */
   text-align: left;
-  justify-content: center;
-  align-items: center;
-  justify-items: center;
   padding: 0.5vh;
-  font-size: 0.9rem;
-  text-decoration: underline;
+  font-size: 1.3rem; /* Match PostMenu item font size */
+  text-decoration: underline; /* Match PostMenu item */
   color: var(--cs-red);
   font-weight: bold;
   cursor: pointer;
 }
 
-.post-menu-user {
-  height: 50%;
-  text-align: left;
-  justify-content: center;
-  align-items: center;
-  justify-items: center;
-  padding: 0.5vh;
-  font-size: 0.8rem;
-  text-decoration: underline;
+/* No forums message */
+#forums-list-container p {
   color: var(--cs-black);
-  cursor: pointer;
-}
-
-/* Button styles remain unchanged */
-#edit-button,
-#delete-button {
-  position: absolute;
-  font-family: 'Dosis', sans-serif;
+  font-family: 'Exo 2', sans-serif;
   font-size: 1rem;
-  background-color: #88C0D0;
-  color: #021013;
-  border: none;
-  border-radius: 20px;
-  padding: 5px 20px;
-  margin-top: 1vh;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  border: 2px solid var(--cs-black);
-}
-
-#edit-button {
-  margin-left: 75%;
-}
-
-#delete-button {
-  margin-left: 85%;
+  text-align: center;
+  padding: 1vh;
 }

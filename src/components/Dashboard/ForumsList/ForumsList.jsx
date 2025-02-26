@@ -1,61 +1,30 @@
-import React, { useContext } from 'react';
-import { UserContext } from '../../../contexts/UserContext'; // Optional: Add styling if needed
-import { useState } from 'react';
+// ForumsList.jsx
+import React from 'react';
+import './ForumsList.css'; // Import the new CSS file
 
-const ForumsList = ({ onTopicSelect, forums = [], forumName }) => {
-  const { user } = useContext(UserContext);
-  const [selectedForum, setSelectedForum] = useState(null);
-
-  const handleTopicClick = (forumId, forumName) => {
-    setSelectedForum(forumId);
-    onTopicSelect(forumId, forumName);
-  };
-
+const ForumsList = ({ onTopicSelect, forums, forumName }) => {
   return (
-    <div id="forums-container">
-      <div id="forums-title">
-        {forumName ? `Forums for "${forumName}"` : 'Forums'}
-      </div>
-      <div id="forums-menu">
-        {forums.length > 0 ? (
-          forums.map((forum) => (
-            <div key={forum.id} className="forums-menu-tab">
+    <div id="forums-list-container">
+      <h2>Forums</h2>
+      {forums.length > 0 ? (
+        <ul>
+          {forums.map((forum) => (
+            <li key={forum._id} className="forum-item">
               <a
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  handleTopicClick(forum.id, forum.name);
+                  onTopicSelect(forum._id, forum.title);
                 }}
-                className={`forums-menu-item ${
-                  selectedForum === forum.id ? 'selected' : ''
-                }`}
               >
-                {forum.name || 'Untitled Forum'}
+                {forum.title}
               </a>
-              {user && (
-                <div className="forum-actions">
-                  {/* <button
-                    className="edit-button"
-                    onClick={() => onTopicSelect(forum.id, forum.name, 'edit')}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="delete-button"
-                    onClick={() => onTopicSelect(forum.id, forum.name, 'delete')}
-                  >
-                    Delete
-                  </button> */}
-                </div>
-              )}
-            </div>
-          ))
-        ) : (
-          <div className="forums-menu-tab">
-            <p>No forums available.</p>
-          </div>
-        )}
-      </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No forums available yet.</p>
+      )}
     </div>
   );
 };

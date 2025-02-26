@@ -21,6 +21,10 @@
   --cs-black: #000000;
 }
 
+body[aria-hidden="true"] {
+  aria-hidden: false !important;
+}
+
 body {
   background-color: var(--cs-black);
   font-family: system-ui, sans-serif; 

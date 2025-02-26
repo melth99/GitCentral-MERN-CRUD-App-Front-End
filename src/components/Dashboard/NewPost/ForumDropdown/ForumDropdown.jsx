@@ -1,9 +1,10 @@
+// ForumDropdown.jsx
 import React, { useState } from 'react';
 import ForumDropdownButton from './ForumDropdownButton';
 import ForumDropdownContent from './ForumDropdownContent';
 import './ForumDropdown.css';
 
-const ForumDropdown = ({ availableTopics, selectedTopicName, setSelectedTopic }) => {
+const ForumDropdown = ({ availableTopics, selectedTopic, setSelectedTopic }) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const handleDropdownButtonClick = () => {
@@ -11,7 +12,7 @@ const ForumDropdown = ({ availableTopics, selectedTopicName, setSelectedTopic })
   };
 
   const handleTopicSelect = (topic) => {
-    setSelectedTopic(topic); // Set the full topic object
+    setSelectedTopic(topic);
     setIsDropdownVisible(false);
   };
 
@@ -19,11 +20,12 @@ const ForumDropdown = ({ availableTopics, selectedTopicName, setSelectedTopic })
     <div className="forum-dropdown-container">
       <ForumDropdownButton
         onClick={handleDropdownButtonClick}
-        selectedForum={selectedTopicName || 'Select a Topic'} // Display topic name
+        selectedForum={selectedTopic?.name || 'Select a Topic'}
+        isDropdownVisible={isDropdownVisible} // Pass visibility for ARIA
       />
       {isDropdownVisible && (
         <ForumDropdownContent
-          availableTopics={availableTopics} // Pass topics
+          availableTopics={availableTopics}
           onTopicSelect={handleTopicSelect}
         />
       )}
