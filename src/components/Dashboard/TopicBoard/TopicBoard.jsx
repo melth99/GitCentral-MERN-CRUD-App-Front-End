@@ -7,6 +7,7 @@ import NewPost from '../NewPost/NewPost/NewPost';
 import NewForum from '../NewForum/NewForum';
 import PostSubmission from '../NewPost/PostSubmission/PostSubmission';
 import { useParams } from 'react-router-dom';
+//import ForumEditDel from '../NewPost/ForumDropdown/ForumEditDel';
 
 const TopicBoard = () => {
   const { topicId } = useParams();
