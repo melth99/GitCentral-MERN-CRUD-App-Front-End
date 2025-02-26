@@ -3,10 +3,10 @@ import React from 'react';
 import { useState } from 'react';
 
 const ForumsList = ({ onTopicSelect }) => {
-  const forums = [
+  const availableForums = [
 
   ];
-  const [forums,setForums] = useState({initialState})
+  const [forums, setForums] = useState({})
 
   const handleTopicClick = (topicId, topicName) => {
     onTopicSelect(topicId, topicName);
@@ -16,7 +16,7 @@ const ForumsList = ({ onTopicSelect }) => {
     <div id="forums-container">
       <div id="forums-title">Forums</div>
       <ul id="forums-menu">
-        {forums.map((topic) => (
+        {availableForums.map((topic) => (
           <li key={topic.id} className="forums-menu-tab">
             <a
               onClick={() => handleTopicClick(topic.id, topic.name)}
