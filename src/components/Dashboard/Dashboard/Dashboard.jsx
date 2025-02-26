@@ -7,8 +7,10 @@ import './Dashboard.css';
 import TopicBoard from '../TopicBoard/TopicBoard';
 import ProfilePage from '../ProfilePage/ProfilePage';
 
-const Dashboard = () => {
+const Dashboard = (onCreateForum) => {
+
   const { user } = useContext(UserContext);
+console.log('onCreateForum in parent:', typeof onCreateForum);
 
   useEffect(() => {
 
@@ -31,7 +33,7 @@ const Dashboard = () => {
 
   return (
     <div>
-    <TopicBoard />
+    <TopicBoard onCreateForum={onCreateForum}/>
     </div>
   );
 };

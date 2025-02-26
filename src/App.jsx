@@ -26,16 +26,24 @@ const App = () => {
     }
     fetchForums()
   }, [])
-
-  async function handleCreateForum(forumData) {
-    try {
-      const data = await forumsService.create(forumData)
-      console.log('fetched forum CREATE/POST', data)
-      setForums([...forums, data])
-    } catch (err) {
-      console.log(err)
-    }
+//NewForum.newForum
+async function handleCreateForum(forumData) {
+  try {
+      // Ensure forumData has all required fields
+      const newForumData = {
+          ...forumData,
+          createdBy: user?._id, // Add user ID if available
+          createdAt: new Date().toISOString()
+      };
+      const data = await forumsService.create(newForumData);
+      setForums([...forums, data]);
+      return data; // Return the created forum
+  } catch (err) {
+      console.error('Error creating forum:', err);
+      throw err;
   }
+}
+  console.log(typeof handleCreateForum)
 
   async function handleDeleteForum(forumIdToDelete) {
     try {
@@ -54,11 +62,14 @@ const App = () => {
     <>
       <NavBar />
       <Routes>
-        <Route path='/' element={user ? <Dashboard forums={forums} onCreateForum={handleCreateForum} onDeleteForum={handleDeleteForum} /> : <Landing />} />
+        <Route path='/' element={user ? <Dashboard forums={forums}  handleCreateForum={handleCreateForum} onDeleteForum={handleDeleteForum} /> : <Landing />} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
         <Route path='/profile' element={<ProfilePage />} />
-        <Route path='/topics/:topicId' element={<TopicBoard />} />
+        <Route
+          path='/topics/:topicId'
+          element={<TopicBoard onCreateForum={handleCreateForum} />}
+        />
         <Route path="/profile/*" element={<ProfilePage />} />
       </Routes>
     </>

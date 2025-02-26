@@ -1,6 +1,6 @@
-import { stringify } from "querystring"
 
-const BASE_URL = `${import.meta.env.VITE_BACK}/forums`
+
+const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/forums`
 
 async function index() {
     try {
@@ -18,15 +18,21 @@ async function create(forumData) {
         const response = await fetch(BASE_URL, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json' // Corrected header
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` // Add auth
             },
-            body: JSON.stringify(forumData) // Removed extra stringify
-        })
-        const data = await response.json()
-        return data
+            body: JSON.stringify(forumData)
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        return data;
     } catch (err) {
-        console.log(err)
-        throw err
+        console.error('Error creating forum:', err);
+        throw err;
     }
 }
 

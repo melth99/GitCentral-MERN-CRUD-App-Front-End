@@ -8,7 +8,8 @@ import NewForum from '../NewForum/NewForum';
 import PostSubmission from '../NewPost/PostSubmission/PostSubmission';
 import { useParams } from 'react-router-dom';
 
-const TopicBoard = () => {
+const TopicBoard = ({ onCreateForum }) => {
+  console.log('onCreateForum type:', typeof onCreateForum); // Should log "function"
   const { topicId } = useParams();
   const { user } = useContext(UserContext);
   const [showNewPost, setShowNewPost] = useState(false);
@@ -52,7 +53,7 @@ const TopicBoard = () => {
   };
 
   const handleTopicSelect = (id, name, action = false) => {
-    if (action === true) { // For posts
+    if (action === true) {
       setSelectedPost(id);
     } else {
       setSelectedTopic(id);
@@ -94,18 +95,23 @@ const TopicBoard = () => {
     setShowNewPost(true);
   };
 
-  const handleNewForumSubmit = (forumData) => {
-    if (editingForum) {
-      setForumList((prevForums) =>
-        prevForums.map((forum) =>
-          forum.id === editingForum.id ? { ...forum, ...forumData } : forum
-        )
-      );
-      setEditingForum(null);
-    } else {
-      setForumList((prevForums) => [...prevForums, forumData]);
+  const handleNewForumSubmit = async (forumData) => {
+    try {
+      if (editingForum) {
+        setForumList((prevForums) =>
+          prevForums.map((forum) =>
+            forum.id === editingForum.id ? { ...forum, ...forumData } : forum
+          )
+        );
+        setEditingForum(null);
+      } else {
+        const createdForum = await onCreateForum(forumData); // This should now work
+        setForumList((prevForums) => [...prevForums, createdForum]);
+      }
+      setShowNewForum(false);
+    } catch (error) {
+      console.error('Error in forum submission:', error);
     }
-    setShowNewForum(false);
   };
 
   return (
@@ -137,10 +143,8 @@ const TopicBoard = () => {
             {showNewForum && (
               <div ref={newForumRef}>
                 <NewForum
-                  onTopicSelect={handleTopicSelect}
                   onClose={() => setShowNewForum(false)}
-                  onSubmit={handleNewForumSubmit}
-                  editingForum={editingForum}
+                  onCreateForum={handleNewForumSubmit} // Pass the local handler
                 />
               </div>
             )}
@@ -175,7 +179,7 @@ const TopicBoard = () => {
             selectedTopic={selectedTopic}
             onDeletePost={handleDeletePost}
             onEditPost={handleEditPost}
-            forums={forumList} // Pass forums down to PostMenu
+            forums={forumList}
           />
         )}
       </main>
