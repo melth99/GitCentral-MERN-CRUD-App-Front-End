@@ -3,15 +3,18 @@ import { UserContext } from '../../../contexts/UserContext';
 import './PostMenu.css';
 import ForumsList from '../ForumsList/ForumsList';
 
-const PostMenu = ({ onTopicSelect, posts, topicName, selectedTopic, onDeletePost, onEditPost }) => {
+const PostMenu = ({ onTopicSelect, posts, topicName, selectedTopic, onDeletePost, onEditPost, forums }) => {
   const { user } = useContext(UserContext);
 
-  // Filter posts to only show those matching the selected topic
   const topicPosts = posts.filter((post) => post.topicId === selectedTopic);
 
   return (
     <div id="bottom-section">
-      <ForumsList onTopicSelect={onTopicSelect} />
+      <ForumsList 
+        onTopicSelect={onTopicSelect}
+        forums={forums} // Pass forums to ForumsList
+        forumName={topicName}
+      />
       <div id="post-menu-container">
         <div id="post-menu-title">
           {topicName ? `Latest posts for "${topicName}"` : 'Select a topic to view discussions'}
@@ -42,13 +45,13 @@ const PostMenu = ({ onTopicSelect, posts, topicName, selectedTopic, onDeletePost
                 </a>
                 <button
                   id="edit-button"
-                  onClick={() => onEditPost(post)} // Trigger edit handler
+                  onClick={() => onEditPost(post)}
                 >
                   Edit
                 </button>
                 <button
                   id="delete-button"
-                  onClick={() => onDeletePost(post.id)} // Trigger delete handler
+                  onClick={() => onDeletePost(post.id)}
                 >
                   Delete
                 </button>

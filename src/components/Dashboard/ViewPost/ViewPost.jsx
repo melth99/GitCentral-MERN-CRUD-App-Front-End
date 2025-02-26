@@ -3,12 +3,16 @@ import { UserContext } from '../../../contexts/UserContext';
 import './ViewPost.css';
 import ForumsList from '../ForumsList/ForumsList';
 
-const ViewPost = ({ topicId, topicName, postId, post, submitButton, onTopicSelect }) => {
+const ViewPost = ({ topicId, topicName, postId, post, submitButton, onTopicSelect, forums }) => {
   const { user } = useContext(UserContext);
 
   return (
     <div id="bottom-section">
-      <ForumsList onTopicSelect={onTopicSelect} />
+      <ForumsList 
+        onTopicSelect={onTopicSelect}
+        forums={forums} // Pass forums to ForumsList
+        forumName={topicName}
+      />
       <div id="viewpost-container">
         <div id="viewpost-title">{topicName}</div>
         <div id="viewpost-menu">

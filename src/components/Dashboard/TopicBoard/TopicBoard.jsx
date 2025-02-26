@@ -1,10 +1,10 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
 import { UserContext } from '../../../contexts/UserContext';
 import './TopicBoard.css';
-import TopicMenu from '../PostMenu/PostMenu';
+import PostMenu from '../PostMenu/PostMenu';
 import ViewPost from '../ViewPost/ViewPost';
 import NewPost from '../NewPost/NewPost/NewPost';
-import NewForum from '../NewForum/NewForum/NewForum';
+import NewForum from '../NewForum/NewForum';
 import PostSubmission from '../NewPost/PostSubmission/PostSubmission';
 import { useParams } from 'react-router-dom';
 
@@ -49,10 +49,10 @@ const TopicBoard = () => {
   const handleForumButtonClick = () => {
     setShowNewForum(true);
     setEditingForum(null);
-  }
+  };
 
-  const handleTopicSelect = (id, name, isPost = false) => {
-    if (isPost) {
+  const handleTopicSelect = (id, name, action = false) => {
+    if (action === true) { // For posts
       setSelectedPost(id);
     } else {
       setSelectedTopic(id);
@@ -95,7 +95,17 @@ const TopicBoard = () => {
   };
 
   const handleNewForumSubmit = (forumData) => {
-    // Implement forum submission logic here
+    if (editingForum) {
+      setForumList((prevForums) =>
+        prevForums.map((forum) =>
+          forum.id === editingForum.id ? { ...forum, ...forumData } : forum
+        )
+      );
+      setEditingForum(null);
+    } else {
+      setForumList((prevForums) => [...prevForums, forumData]);
+    }
+    setShowNewForum(false);
   };
 
   return (
@@ -127,9 +137,8 @@ const TopicBoard = () => {
             {showNewForum && (
               <div ref={newForumRef}>
                 <NewForum
-                onTopicSelect={handleTopicSelect}
-                onClose={() => setShowNewForum(false)}
-                  forumList={forumList}
+                  onTopicSelect={handleTopicSelect}
+                  onClose={() => setShowNewForum(false)}
                   onSubmit={handleNewForumSubmit}
                   editingForum={editingForum}
                 />
@@ -156,15 +165,17 @@ const TopicBoard = () => {
             post={posts.find((p) => p.id === selectedPost)}
             submitButton={PostSubmission}
             onTopicSelect={handleTopicSelect}
+            forums={forumList}
           />
         ) : (
-          <TopicMenu
+          <PostMenu
             onTopicSelect={handleTopicSelect}
             posts={posts}
             topicName={selectedTopicName}
             selectedTopic={selectedTopic}
             onDeletePost={handleDeletePost}
             onEditPost={handleEditPost}
+            forums={forumList} // Pass forums down to PostMenu
           />
         )}
       </main>
