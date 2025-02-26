@@ -51,13 +51,13 @@ const signIn = async (formData) => {
     const data = await res.json();
 
     if (!res.ok || data.err) {
-      throw new Error(data.err || `Sign-in failed: ${res.status}`);
+      throw new Error(data.err || `Sign-up failed: ${res.status}`);
     }
 
     if (!data.token) {
       throw new Error('No token received from server');
     }
-
+console.log(data)
     localStorage.setItem('token', data.token);
     try {
       const decodedPayload = JSON.parse(atob(data.token.split('.')[1])).payload;

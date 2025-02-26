@@ -1,5 +1,7 @@
+// frontend/components/NewForum/NewForum.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import './NewForum.css';
+import { create } from '../../../services/forumsService'; // Updated to 'create'
 
 const NewForum = ({ onTopicSelect, onClose, onSubmit }) => {
   const [newTopicTitle, setNewTopicTitle] = useState('');
@@ -31,33 +33,17 @@ const NewForum = ({ onTopicSelect, onClose, onSubmit }) => {
       return;
     }
 
-    const token = localStorage.getItem('token');
     const forumData = { title: newTopicTitle };
 
     try {
-      const response = await fetch('http://localhost:3000/forums', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify(forumData),
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Failed to create forum: ${response.status} - ${errorText}`);
-      }
-
-      const result = await response.json();
+      const result = await create(forumData); // Updated to 'create'
       console.log('Forum created:', result);
-
       onSubmit(result);
       setNewTopicTitle('');
       setError('');
       onClose();
     } catch (error) {
-      console.error('Error creating forum:', error);
+      console.error('Error creating forum:', error.message);
       if (error.message.includes('401')) {
         setError('Please log in to create a forum.');
       } else if (error.message.includes('400')) {

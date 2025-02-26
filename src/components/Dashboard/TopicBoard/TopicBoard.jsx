@@ -7,6 +7,7 @@ import NewPost from '../NewPost/NewPost/NewPost';
 import NewForum from '../NewForum/NewForum';
 import PostSubmission from '../NewPost/PostSubmission/PostSubmission';
 import { useParams } from 'react-router-dom';
+import * as postService from '../../../services/postService'; // Correct import path
 
 const TopicBoard = () => {
   const { topicId } = useParams();
@@ -23,6 +24,10 @@ const TopicBoard = () => {
   const newPostRef = useRef(null);
 
   // Fetch forums and posts on mount or when selectedTopic changes
+
+  //forumService.create
+  //forumService.update
+  //set the state
   useEffect(() => {
     const fetchForums = async () => {
       try {
@@ -105,9 +110,15 @@ const TopicBoard = () => {
     setSelectedPost(postData._id); // Auto-select the new post
   };
 
-  const handleDeletePost = (postId) => {
+  const handleDeletePost = async (postId) => {
+    try{
+    await postService.deletePost(postId); // Add deletePost function
     setPosts((prevPosts) => prevPosts.filter((post) => post._id !== postId));
     setSelectedPost(null);
+    }
+    catch(error){
+      console.error('Error deleting post:', error);
+    }
   };
 
   const handleEditPost = (post) => {

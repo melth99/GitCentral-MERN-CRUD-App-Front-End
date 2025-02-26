@@ -26,7 +26,6 @@ const SignInForm = () => {
     try {
       const signedInUser = await signIn(formData); // Call signIn from authService
       setUser(signedInUser); // Update UserContext with the signed-in user
-      localStorage.setItem('token', signedInUser.token); // Ensure token is stored
       navigate('/'); // Redirect to home/dashboard
     } catch (err) {
       console.error('Sign-in error:', err.message);
