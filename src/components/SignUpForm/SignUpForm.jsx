@@ -59,7 +59,7 @@ const SignUpForm = () => {
     };
 
     return (
-        <main>
+        <main className="signup-form">
             <h1>Sign Up</h1>
             <p>{message}</p>
             <form onSubmit={handleSubmit}>
@@ -67,7 +67,7 @@ const SignUpForm = () => {
                     <label htmlFor='username'>Username:</label>
                     <input
                         type='text'
-                        id='name'
+                        id='username'
                         value={username}
                         name='username'
                         onChange={handleChange}
@@ -98,7 +98,7 @@ const SignUpForm = () => {
                 </div>
                 <div className="signup">
                     <button disabled={isFormInvalid()}>Sign Up</button>
-                    <button onClick={() => navigate('/')}>Cancel</button>
+                    <button type="button" onClick={() => navigate('/')}>Cancel</button>
                 </div>
 
             </form>

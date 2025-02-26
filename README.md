@@ -23,7 +23,6 @@
 ### ✅ Forum & Discussion
 - **Create, edit, and delete** forum posts and comments.
 - Like posts and interact with other users.
-- Guest users can view forums but cannot interact until they register.
 
 ### ✅ Hot Topics
 - A dedicated **"Hot Topics"** section that highlights the most liked discussions.
@@ -54,4 +53,3 @@
 
 
 ## 🎉Upcoming Features
-

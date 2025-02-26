@@ -1,4 +1,4 @@
-/* main {
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,51 +8,51 @@
     color: #ffffff;
   }
 
-  h1 {
-    font-size: 2rem;
-    color: #00ffff;
-    margin-bottom: 10px;
-  }
+.signup-form h1 {
+  font-size: 2rem;
+  color: #00ffff;
+  margin-bottom: 10px;
+}
 
-  p {
-    color: #ff0000;
-    font-size: 1rem;
-  }
+.signup-form p {
+  color: #ff0000;
+  font-size: 1rem;
+}
 
-  form {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-  }
+.signup-form form {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
 
-  div {
-    margin-bottom: 15px;
-  }
+.signup-form div {
+  margin-bottom: 15px;
+}
 
-  label {
-    display: block;
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-  }
+.signup-form label {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
 
-  input {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.2);
-    color: white;
-    font-size: 1rem;
-  }
+.signup-form input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 1rem;
+}
 
-  input:focus {
-    outline: none;
-    box-shadow: 0px 0px 10px #00ffff;
-  }
+.signup-form input:focus {
+  outline: none;
+  box-shadow: 0px 0px 10px #00ffff;
+}
 
-  .signup button {
+  button {
     width: 100%;
     padding: 12px;
     margin-top: 10px;
@@ -62,27 +62,27 @@
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s ease-in-out;
-}
+  }
 
-.signup button:disabled {
+  button:disabled {
     background: gray;
     cursor: not-allowed;
-}
+  }
 
-.signup button:first-of-type {
+  button:first-of-type {
     background-color: #00ffff;
     color: #000;
-}
+  }
 
-.signup button:first-of-type:hover {
+  button:first-of-type:hover {
     background-color: #008b8b;
-}
+  }
 
-.signup button:last-of-type {
+  button:last-of-type {
     background-color: #ff0000;
     color: #fff;
-}
+  }
 
-.signup button:last-of-type:hover {
+  button:last-of-type:hover {
     background-color: #8b0000;
-} */
+  }
