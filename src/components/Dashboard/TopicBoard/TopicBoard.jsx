@@ -16,13 +16,13 @@ const TopicBoard = () => {
   const [forumList, setForumList] = useState([]);
   const [editingForum, setEditingForum] = useState(null);
   const newForumRef = useRef(null);
-  const [selectedTopic, setSelectedTopic] = useState(null); // Single source of truth for selected topic
+  const [selectedTopic, setSelectedTopic] = useState(null);
   const [selectedPost, setSelectedPost] = useState(null);
   const [posts, setPosts] = useState([]);
   const [editingPost, setEditingPost] = useState(null);
   const newPostRef = useRef(null);
 
-  // Fetch initial forums and posts on mount
+  // Fetch forums and posts on mount or when selectedTopic changes
   useEffect(() => {
     const fetchForums = async () => {
       try {
@@ -30,7 +30,6 @@ const TopicBoard = () => {
         if (!response.ok) throw new Error('Failed to fetch forums');
         const forums = await response.json();
         setForumList(forums);
-        // Set initial selectedTopic from URL topicId if provided
         if (topicId) {
           const initialTopic = forums.find((t) => t._id === topicId);
           if (initialTopic) setSelectedTopic(initialTopic);
@@ -39,7 +38,20 @@ const TopicBoard = () => {
         console.error('Error fetching forums:', error);
       }
     };
+
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/posts');
+        if (!response.ok) throw new Error('Failed to fetch posts');
+        const allPosts = await response.json();
+        setPosts(allPosts);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+
     fetchForums();
+    fetchPosts();
   }, [topicId]);
 
   // Handle clicks outside to close modals
@@ -68,33 +80,33 @@ const TopicBoard = () => {
     setEditingForum(null);
   };
 
-  const handleTopicSelect = (id, title, action = false) => { // Changed name to title
+  const handleTopicSelect = (id, title, action = false) => {
     if (action) {
       setSelectedPost(id);
-      setSelectedTopic(null); // Clear topic when viewing a post
+      setSelectedTopic(null);
     } else {
-      const topic = forumList.find((t) => t._id === id) || { _id: id, title }; // Changed name to title
+      const topic = forumList.find((t) => t._id === id) || { _id: id, title };
       setSelectedTopic(topic);
-      setSelectedPost(null); // Clear post selection when switching topics
+      setSelectedPost(null);
     }
   };
 
   const handleNewPostSubmit = (postData) => {
-    if (editingPost) {
-      setPosts((prevPosts) =>
-        prevPosts.map((post) =>
-          post.id === editingPost.id ? { ...post, ...postData } : post
-        )
-      );
-    } else {
-      setPosts((prevPosts) => [...prevPosts, { ...postData, id: Date.now() }]);
-    }
+    setPosts((prevPosts) => {
+      if (editingPost) {
+        return prevPosts.map((post) =>
+          post._id === editingPost._id ? { ...post, ...postData } : post
+        );
+      }
+      return [...prevPosts, postData];
+    });
     setShowNewPost(false);
     setEditingPost(null);
+    setSelectedPost(postData._id); // Auto-select the new post
   };
 
   const handleDeletePost = (postId) => {
-    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+    setPosts((prevPosts) => prevPosts.filter((post) => post._id !== postId));
     setSelectedPost(null);
   };
 
@@ -124,12 +136,12 @@ const TopicBoard = () => {
           <div className="image-container">
             <img
               src={selectedTopic?.imageUrl || 'https://via.placeholder.com/150'}
-              alt={selectedTopic?.title || 'Home Dashboard'} // Changed name to title
+              alt={selectedTopic?.title || 'Home Dashboard'}
               onError={(e) => (e.target.style.display = 'none')}
             />
           </div>
           <div id="topic-info">
-            <h1 id="topic-board-title">{selectedTopic?.title || 'Home Dashboard'}</h1> {/* Changed name to title */}
+            <h1 id="topic-board-title">{selectedTopic?.title || 'Home Dashboard'}</h1>
             <div className="buttons-container">
               <button className="follow-button">
                 followers: {selectedTopic?.followers || 'unknown'}
@@ -160,7 +172,7 @@ const TopicBoard = () => {
             <div ref={newPostRef}>
               <NewPost
                 topicId={selectedTopic?._id || topicId}
-                selectedTopicName={selectedTopic?.title} // Changed name to title
+                selectedTopicName={selectedTopic?.title}
                 availableTopics={forumList}
                 onSubmit={handleNewPostSubmit}
                 editingPost={editingPost}
@@ -171,9 +183,9 @@ const TopicBoard = () => {
         {selectedPost ? (
           <ViewPost
             topicId={selectedTopic?._id}
-            topicName={selectedTopic?.title} // Changed name to title
+            topicName={selectedTopic?.title}
             postId={selectedPost}
-            post={posts.find((p) => p.id === selectedPost)}
+            post={posts.find((p) => p._id === selectedPost)}
             submitButton={PostSubmission}
             onTopicSelect={handleTopicSelect}
             forums={forumList}
@@ -182,7 +194,7 @@ const TopicBoard = () => {
           <PostMenu
             onTopicSelect={handleTopicSelect}
             posts={posts}
-            topicName={selectedTopic?.title} // Changed name to title
+            topicName={selectedTopic?.title}
             selectedTopic={selectedTopic?._id}
             onDeletePost={handleDeletePost}
             onEditPost={handleEditPost}

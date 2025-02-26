@@ -14,12 +14,12 @@ const ViewPost = ({ topicId, topicName, postId, post, submitButton, onTopicSelec
         forumName={topicName}
       />
       <div id="viewpost-container">
-        <div id="viewpost-title">{topicName}</div>
+        <div id="viewpost-title">{post?.title || 'Post Title'}</div>
         <div id="viewpost-menu">
           <div id="viewpost-left-section">
             <div id="viewpost-content-backdrop">
               <div id="viewpost-content-main">
-                <p>{post?.contents || 'Post content for post ID: ' + postId}</p>
+                <p>{post?.contents || 'No content available'}</p>
               </div>
             </div>
             <div id="viewpost-comments-backdrop">

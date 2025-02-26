@@ -37,7 +37,7 @@ const PostMenu = ({ onTopicSelect, posts, topicName, selectedTopic, onDeletePost
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
-                    onTopicSelect(post._id, post.creator, true);
+                    onTopicSelect(post._id, post.title, true);
                   }}
                   className="post-menu-user"
                 >

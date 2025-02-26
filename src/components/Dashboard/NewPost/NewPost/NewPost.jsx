@@ -6,31 +6,28 @@ import PostBody from '../PostBody/PostBody';
 import './NewPost.css';
 import PostNav from '../PostNav/PostNav';
 import PostSubmission from '../PostSubmission/PostSubmission';
-import * as postService from '../../../../services/postService';
 
 const NewPost = ({ topicId, onSubmit, selectedTopicName, availableTopics, editingPost }) => {
   const { user } = useContext(UserContext);
   const [isEditing, setIsEditing] = useState(true);
   const [inputValue, setInputValue] = useState(editingPost?.title || '');
-  const [bodyValue, setBodyValue] = useState(editingPost?.body || '');
+  const [bodyValue, setBodyValue] = useState(editingPost?.contents || '');
   const [selectedTopic, setSelectedTopic] = useState(
-    availableTopics.find((topic) => topic.title === selectedTopicName) || null // Changed name to title
+    availableTopics.find((topic) => topic.title === selectedTopicName) || null
   );
   const dropdownRef = useRef(null);
 
-  // Sync selectedTopic with props changes
   useEffect(() => {
-    const newSelectedTopic = availableTopics.find((topic) => topic.title === selectedTopicName) || null; // Changed name to title
+    const newSelectedTopic = availableTopics.find((topic) => topic.title === selectedTopicName) || null;
     if (newSelectedTopic?._id !== selectedTopic?._id) {
       setSelectedTopic(newSelectedTopic);
     }
   }, [selectedTopicName, availableTopics]);
 
-  // Handle click outside to potentially close dropdown or reset state
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        // Optional: Add logic to close or reset if needed
+        // Optional: Add logic if needed
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -42,29 +39,39 @@ const NewPost = ({ topicId, onSubmit, selectedTopicName, availableTopics, editin
 
   const handlePostSubmit = async (e) => {
     e.preventDefault();
-    if (!inputValue.trim() || !bodyValue.trim()) {
-      console.warn('Title and body are required');
+    if (!inputValue.trim() || !bodyValue.trim() || !selectedTopic) {
+      console.warn('Title, body, and forum are required');
       return;
     }
 
     const newPost = {
+      forum: selectedTopic._id,
+      creator: user?.username || 'Anonymous',
       title: inputValue.trim(),
-      body: bodyValue.trim(),
-      topicId: selectedTopic?._id || topicId, // Use _id to match TopicBoard
-      userId: user?.id,
+      contents: bodyValue.trim(),
     };
 
     try {
       let createdPost;
       if (editingPost) {
-        createdPost = await postService.updatePost(editingPost.id, newPost);
+        const response = await fetch(`http://localhost:3000/posts/${editingPost._id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newPost),
+        });
+        createdPost = await response.json();
       } else {
-        createdPost = await postService.createPost(newPost);
+        const response = await fetch('http://localhost:3000/posts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newPost),
+        });
+        createdPost = await response.json();
       }
       onSubmit(createdPost);
       setInputValue('');
       setBodyValue('');
-      setSelectedTopic(null); // Reset topic selection after submission
+      setSelectedTopic(null);
     } catch (error) {
       console.error('Error submitting post:', error);
     }
@@ -75,7 +82,7 @@ const NewPost = ({ topicId, onSubmit, selectedTopicName, availableTopics, editin
       <h1 id="post-heading">{editingPost ? 'Edit Post' : 'Create a New Post'}</h1>
       <ForumDropdown
         availableTopics={availableTopics}
-        selectedTopic={selectedTopic} // Pass full object
+        selectedTopic={selectedTopic}
         setSelectedTopic={setSelectedTopic}
       />
       <PostNav />
