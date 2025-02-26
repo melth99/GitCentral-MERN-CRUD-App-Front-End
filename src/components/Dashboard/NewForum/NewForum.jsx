@@ -1,13 +1,9 @@
-import React, { useState, useRef, useEffect, } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './NewForum.css';
 
 const NewForum = ({ onTopicSelect, onClose, onSubmit }) => {
   const [newTopicName, setNewTopicName] = useState('');
   const containerRef = useRef(null);
-
-  const handleTopicClick = (topicId, topicName) => {
-    onTopicSelect(topicId, topicName);
-  };
 
   const handleClickOutside = (event) => {
     if (containerRef.current && !containerRef.current.contains(event.target)) {
@@ -25,8 +21,13 @@ const NewForum = ({ onTopicSelect, onClose, onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (newTopicName) {
-      onSubmit({ name: newTopicName });
-      setNewTopicName('');
+      const newForum = {
+        id: Date.now().toString(), // Generate a unique ID
+        name: newTopicName
+      };
+      onSubmit(newForum); // Pass the new forum object up to TopicBoard
+      setNewTopicName(''); // Clear the input
+      onClose(); // Close the form after submission
     }
   };
 
