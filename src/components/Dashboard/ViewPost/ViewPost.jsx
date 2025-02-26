@@ -10,7 +10,7 @@ const ViewPost = ({ topicId, topicName, postId, post, submitButton, onTopicSelec
     <div id="bottom-section">
       <ForumsList 
         onTopicSelect={onTopicSelect}
-        forums={forums} // Pass forums to ForumsList
+        forums={forums}
         forumName={topicName}
       />
       <div id="viewpost-container">
@@ -19,7 +19,7 @@ const ViewPost = ({ topicId, topicName, postId, post, submitButton, onTopicSelec
           <div id="viewpost-left-section">
             <div id="viewpost-content-backdrop">
               <div id="viewpost-content-main">
-                <p>{post?.body || 'Post content for post ID: ' + postId}</p>
+                <p>{post?.contents || 'Post content for post ID: ' + postId}</p>
               </div>
             </div>
             <div id="viewpost-comments-backdrop">

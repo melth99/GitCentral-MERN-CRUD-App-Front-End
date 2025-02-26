@@ -6,13 +6,13 @@ import ForumsList from '../ForumsList/ForumsList';
 const PostMenu = ({ onTopicSelect, posts, topicName, selectedTopic, onDeletePost, onEditPost, forums }) => {
   const { user } = useContext(UserContext);
 
-  const topicPosts = posts.filter((post) => post.topicId === selectedTopic);
+  const topicPosts = posts.filter((post) => post.forum === selectedTopic);
 
   return (
     <div id="bottom-section">
       <ForumsList 
         onTopicSelect={onTopicSelect}
-        forums={forums} // Pass forums to ForumsList
+        forums={forums}
         forumName={topicName}
       />
       <div id="post-menu-container">
@@ -22,12 +22,12 @@ const PostMenu = ({ onTopicSelect, posts, topicName, selectedTopic, onDeletePost
         <div id="post-menu-menu">
           {topicPosts.length > 0 ? (
             topicPosts.map((post) => (
-              <div key={post.id} className="post-menu-tab">
+              <div key={post._id} className="post-menu-tab">
                 <a
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
-                    onTopicSelect(post.id, post.title, true);
+                    onTopicSelect(post._id, post.title, true);
                   }}
                   className="post-menu-item"
                 >
@@ -37,22 +37,16 @@ const PostMenu = ({ onTopicSelect, posts, topicName, selectedTopic, onDeletePost
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
-                    onTopicSelect(post.id, post.username, true);
+                    onTopicSelect(post._id, post.creator, true);
                   }}
                   className="post-menu-user"
                 >
-                  {post.username || 'Anonymous'}
+                  {post.creator || 'Anonymous'}
                 </a>
-                <button
-                  id="edit-button"
-                  onClick={() => onEditPost(post)}
-                >
+                <button id="edit-button" onClick={() => onEditPost(post)}>
                   Edit
                 </button>
-                <button
-                  id="delete-button"
-                  onClick={() => onDeletePost(post.id)}
-                >
+                <button id="delete-button" onClick={() => onDeletePost(post._id)}>
                   Delete
                 </button>
               </div>

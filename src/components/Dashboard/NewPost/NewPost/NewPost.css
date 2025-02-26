@@ -21,6 +21,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   border: 3px solid var(--cs-black);
+  overflow: visible; /* Ensure dropdown isn’t clipped */
 }
 
 #post-heading {

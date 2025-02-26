@@ -1,4 +1,3 @@
-// ForumDropdown.jsx
 import React, { useState } from 'react';
 import ForumDropdownButton from './ForumDropdownButton';
 import ForumDropdownContent from './ForumDropdownContent';
@@ -20,8 +19,8 @@ const ForumDropdown = ({ availableTopics, selectedTopic, setSelectedTopic }) => 
     <div className="forum-dropdown-container">
       <ForumDropdownButton
         onClick={handleDropdownButtonClick}
-        selectedForum={selectedTopic?.name || 'Select a Topic'}
-        isDropdownVisible={isDropdownVisible} // Pass visibility for ARIA
+        selectedForum={selectedTopic?.title || 'Select a Topic'} // Changed name to title
+        isDropdownVisible={isDropdownVisible}
       />
       {isDropdownVisible && (
         <ForumDropdownContent

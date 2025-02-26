@@ -31,7 +31,7 @@ const NewForum = ({ onTopicSelect, onClose, onSubmit }) => {
       return;
     }
 
-    const token = localStorage.getItem('token'); // Adjust based on your auth system
+    const token = localStorage.getItem('token');
     const forumData = { title: newTopicTitle };
 
     try {
@@ -71,7 +71,7 @@ const NewForum = ({ onTopicSelect, onClose, onSubmit }) => {
   return (
     <div id="new-forum-container" ref={containerRef}>
       <div id="new-forum-title">Create a New Forum</div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="new-forum-form">
         <input
           type="text"
           value={newTopicTitle}
@@ -80,9 +80,12 @@ const NewForum = ({ onTopicSelect, onClose, onSubmit }) => {
             setError(validateTitle(e.target.value));
           }}
           placeholder="Enter forum title (5–100 characters)"
+          className="new-forum-input"
         />
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit" disabled={!!error}>Create</button>
+        {error && <p className="error-message">{error}</p>}
+        <button type="submit" disabled={!!error} className="publish-forum-button">
+          Publish
+        </button>
       </form>
     </div>
   );

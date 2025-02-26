@@ -1,4 +1,3 @@
-// TopicBoard.jsx
 import React, { useContext, useState, useRef, useEffect } from 'react';
 import { UserContext } from '../../../contexts/UserContext';
 import './TopicBoard.css';
@@ -23,7 +22,7 @@ const TopicBoard = () => {
   const [editingPost, setEditingPost] = useState(null);
   const newPostRef = useRef(null);
 
-  // Fetch initial forums on mount
+  // Fetch initial forums and posts on mount
   useEffect(() => {
     const fetchForums = async () => {
       try {
@@ -31,7 +30,7 @@ const TopicBoard = () => {
         if (!response.ok) throw new Error('Failed to fetch forums');
         const forums = await response.json();
         setForumList(forums);
-        // If topicId is provided via URL, set initial selectedTopic
+        // Set initial selectedTopic from URL topicId if provided
         if (topicId) {
           const initialTopic = forums.find((t) => t._id === topicId);
           if (initialTopic) setSelectedTopic(initialTopic);
@@ -69,13 +68,14 @@ const TopicBoard = () => {
     setEditingForum(null);
   };
 
-  const handleTopicSelect = (id, name, action = false) => {
+  const handleTopicSelect = (id, title, action = false) => { // Changed name to title
     if (action) {
       setSelectedPost(id);
+      setSelectedTopic(null); // Clear topic when viewing a post
     } else {
-      const topic = forumList.find((t) => t._id === id) || { _id: id, name };
+      const topic = forumList.find((t) => t._id === id) || { _id: id, title }; // Changed name to title
       setSelectedTopic(topic);
-      setSelectedPost(null);
+      setSelectedPost(null); // Clear post selection when switching topics
     }
   };
 
@@ -124,12 +124,12 @@ const TopicBoard = () => {
           <div className="image-container">
             <img
               src={selectedTopic?.imageUrl || 'https://via.placeholder.com/150'}
-              alt={selectedTopic?.name || 'Home Dashboard'}
+              alt={selectedTopic?.title || 'Home Dashboard'} // Changed name to title
               onError={(e) => (e.target.style.display = 'none')}
             />
           </div>
           <div id="topic-info">
-            <h1 id="topic-board-title">{selectedTopic?.name || 'Home Dashboard'}</h1>
+            <h1 id="topic-board-title">{selectedTopic?.title || 'Home Dashboard'}</h1> {/* Changed name to title */}
             <div className="buttons-container">
               <button className="follow-button">
                 followers: {selectedTopic?.followers || 'unknown'}
@@ -160,7 +160,7 @@ const TopicBoard = () => {
             <div ref={newPostRef}>
               <NewPost
                 topicId={selectedTopic?._id || topicId}
-                selectedTopicName={selectedTopic?.name}
+                selectedTopicName={selectedTopic?.title} // Changed name to title
                 availableTopics={forumList}
                 onSubmit={handleNewPostSubmit}
                 editingPost={editingPost}
@@ -171,7 +171,7 @@ const TopicBoard = () => {
         {selectedPost ? (
           <ViewPost
             topicId={selectedTopic?._id}
-            topicName={selectedTopic?.name}
+            topicName={selectedTopic?.title} // Changed name to title
             postId={selectedPost}
             post={posts.find((p) => p.id === selectedPost)}
             submitButton={PostSubmission}
@@ -182,7 +182,7 @@ const TopicBoard = () => {
           <PostMenu
             onTopicSelect={handleTopicSelect}
             posts={posts}
-            topicName={selectedTopic?.name}
+            topicName={selectedTopic?.title} // Changed name to title
             selectedTopic={selectedTopic?._id}
             onDeletePost={handleDeletePost}
             onEditPost={handleEditPost}

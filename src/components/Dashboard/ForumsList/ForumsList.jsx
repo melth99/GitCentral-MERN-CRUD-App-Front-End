@@ -1,6 +1,5 @@
-// ForumsList.jsx
 import React from 'react';
-import './ForumsList.css'; // Import the new CSS file
+import './ForumsList.css';
 
 const ForumsList = ({ onTopicSelect, forums, forumName }) => {
   return (
@@ -14,10 +13,10 @@ const ForumsList = ({ onTopicSelect, forums, forumName }) => {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  onTopicSelect(forum._id, forum.title);
+                  onTopicSelect(forum._id, forum.title); // Changed name to title
                 }}
               >
-                {forum.title}
+                {forum.title} {/* Changed name to title */}
               </a>
             </li>
           ))}

@@ -1,4 +1,3 @@
-// NewPost.jsx
 import React, { useContext, useState, useRef, useEffect } from 'react';
 import { UserContext } from '../../../../contexts/UserContext';
 import ForumDropdown from '../ForumDropdown/ForumDropdown';
@@ -15,13 +14,13 @@ const NewPost = ({ topicId, onSubmit, selectedTopicName, availableTopics, editin
   const [inputValue, setInputValue] = useState(editingPost?.title || '');
   const [bodyValue, setBodyValue] = useState(editingPost?.body || '');
   const [selectedTopic, setSelectedTopic] = useState(
-    availableTopics.find((topic) => topic.name === selectedTopicName) || null
+    availableTopics.find((topic) => topic.title === selectedTopicName) || null // Changed name to title
   );
   const dropdownRef = useRef(null);
 
   // Sync selectedTopic with props changes
   useEffect(() => {
-    const newSelectedTopic = availableTopics.find((topic) => topic.name === selectedTopicName) || null;
+    const newSelectedTopic = availableTopics.find((topic) => topic.title === selectedTopicName) || null; // Changed name to title
     if (newSelectedTopic?._id !== selectedTopic?._id) {
       setSelectedTopic(newSelectedTopic);
     }
@@ -32,7 +31,6 @@ const NewPost = ({ topicId, onSubmit, selectedTopicName, availableTopics, editin
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         // Optional: Add logic to close or reset if needed
-        // For now, it does nothing but can be extended
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -69,7 +67,6 @@ const NewPost = ({ topicId, onSubmit, selectedTopicName, availableTopics, editin
       setSelectedTopic(null); // Reset topic selection after submission
     } catch (error) {
       console.error('Error submitting post:', error);
-      // Optional: Add user-facing error feedback here
     }
   };
 
@@ -78,7 +75,7 @@ const NewPost = ({ topicId, onSubmit, selectedTopicName, availableTopics, editin
       <h1 id="post-heading">{editingPost ? 'Edit Post' : 'Create a New Post'}</h1>
       <ForumDropdown
         availableTopics={availableTopics}
-        selectedTopic={selectedTopic} // Pass full object instead of just name
+        selectedTopic={selectedTopic} // Pass full object
         setSelectedTopic={setSelectedTopic}
       />
       <PostNav />
