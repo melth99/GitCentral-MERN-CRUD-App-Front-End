@@ -20,7 +20,7 @@ const TopicBoard = () => {
   const [selectedPost, setSelectedPost] = useState(null);
   const [selectedTopicName, setSelectedTopicName] = useState(null);
   const [topicData, setTopicData] = useState({
-    title: 'Welcome to the Topic Board! Select a topic to get started.',
+    title: 'Home Dashboard',
     imageUrl: 'https://via.placeholder.com/150',
     followers: 'unknown',
   });

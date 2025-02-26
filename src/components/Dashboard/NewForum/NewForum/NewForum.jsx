@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, } from 'react';
 import './NewForum.css';
 
-const NewForum = ({ onTopicSelect, onClose }) => {
-  const [forumList, setForumList] = useState([]);
+const NewForum = ({ onTopicSelect, onClose, onSubmit }) => {
   const [newTopicName, setNewTopicName] = useState('');
   const containerRef = useRef(null);
 
@@ -26,11 +25,7 @@ const NewForum = ({ onTopicSelect, onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (newTopicName) {
-      const newTopic = {
-        id: forumList.length + 1,
-        name: newTopicName,
-      };
-      setForumList([...forumList, newTopic]);
+      onSubmit({ name: newTopicName });
       setNewTopicName('');
     }
   };
@@ -47,18 +42,6 @@ const NewForum = ({ onTopicSelect, onClose }) => {
         />
         <button type="submit">Create</button>
       </form>
-      <ul id="new-forum-menu">
-        {forumList.map((topic) => (
-          <li key={topic.id} className="new-forum-menu-tab">
-            <a
-              onClick={() => handleTopicClick(topic.id, topic.name)}
-              className="new-forum-menu-item"
-            >
-              {topic.name}
-            </a>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
