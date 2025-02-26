@@ -7,9 +7,12 @@ import NewPost from '../NewPost/NewPost/NewPost';
 import NewForum from '../NewForum/NewForum';
 import PostSubmission from '../NewPost/PostSubmission/PostSubmission';
 import { useParams } from 'react-router-dom';
+import * as postService from '../../../services/postService'
+
 //import ForumEditDel from '../NewPost/ForumDropdown/ForumEditDel';
 
-const TopicBoard = () => {
+const TopicBoard = ({ onCreateForum }) => {
+  console.log('onCreateForum type:', typeof onCreateForum); // Should log "function"
   const { topicId } = useParams();
   const { user } = useContext(UserContext);
   const [showNewPost, setShowNewPost] = useState(false);
@@ -31,10 +34,7 @@ const TopicBoard = () => {
         if (!response.ok) throw new Error('Failed to fetch forums');
         const forums = await response.json();
         setForumList(forums);
-        if (topicId) {
-          const initialTopic = forums.find((t) => t._id === topicId);
-          if (initialTopic) setSelectedTopic(initialTopic);
-        }
+
       } catch (error) {
         console.error('Error fetching forums:', error);
       }
@@ -116,6 +116,9 @@ const TopicBoard = () => {
     setShowNewPost(true);
   };
 
+  const handleEditPostFetch = async (post, postId) => {
+
+  }
   const handleNewForumSubmit = (forumData) => {
     if (editingForum) {
       setForumList((prevForums) =>
@@ -177,6 +180,8 @@ const TopicBoard = () => {
                 availableTopics={forumList}
                 onSubmit={handleNewPostSubmit}
                 editingPost={editingPost}
+
+                
               />
             </div>
           )}

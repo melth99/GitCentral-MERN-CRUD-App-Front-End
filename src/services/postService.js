@@ -8,7 +8,7 @@ export async function createPost(postData) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...(token && { 'Authorization': `Bearer ${token}` }), // Only add if token exists
+      'Authorization': `Bearer ${token}` 
     },
     body: JSON.stringify(postData),
   });
@@ -18,11 +18,11 @@ export async function createPost(postData) {
 
 export async function updatePost(postId, postData) {
   const token = getToken();
-  const response = await fetch(`${API_URL}/posts/${postId}`, {
+  const response = await fetch(`${API_URL}/posts/${postId}/update`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      ...(token && { 'Authorization': `Bearer ${token}` }),
+      'Authorization': `Bearer ${token}`
     },
     body: JSON.stringify(postData),
   });

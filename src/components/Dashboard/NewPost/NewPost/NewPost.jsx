@@ -7,7 +7,7 @@ import './NewPost.css';
 import PostNav from '../PostNav/PostNav';
 import PostSubmission from '../PostSubmission/PostSubmission';
 
-const NewPost = ({ topicId, onSubmit, selectedTopicName, availableTopics, editingPost }) => {
+const NewPost = ({ topicId, onSubmit, selectedTopicName, availableTopics, editingPost, onEdit }) => {
   const { user } = useContext(UserContext);
   const [isEditing, setIsEditing] = useState(true);
   const [inputValue, setInputValue] = useState(editingPost?.title || '');
@@ -54,19 +54,9 @@ const NewPost = ({ topicId, onSubmit, selectedTopicName, availableTopics, editin
     try {
       let createdPost;
       if (editingPost) {
-        const response = await fetch(`http://localhost:3000/posts/${editingPost._id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newPost),
-        });
-        createdPost = await response.json();
+        
       } else {
-        const response = await fetch('http://localhost:3000/posts', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newPost),
-        });
-        createdPost = await response.json();
+       
       }
       onSubmit(createdPost);
       setInputValue('');

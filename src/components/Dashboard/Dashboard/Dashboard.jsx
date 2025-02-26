@@ -4,8 +4,10 @@ import * as userService from '../../../services/userService';
 import './Dashboard.css';
 import TopicBoard from '../TopicBoard/TopicBoard';
 
-const Dashboard = () => {
+const Dashboard = (onCreateForum) => {
+
   const { user } = useContext(UserContext);
+console.log('onCreateForum in parent:', typeof onCreateForum);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -23,7 +25,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       {user && <h2>Welcome, {user.username}</h2>}
-      <TopicBoard />
+      <TopicBoard onCreateForum={onCreateForum}/>
     </div>
   );
 };

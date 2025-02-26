@@ -1,12 +1,12 @@
 import React from 'react';
 import './PostBody.css';
 
-const PostBody = (props) => {
+const PostBody = ({ handleBodyChange, bodyValue}) => {
   return (
     <div className="post-body">
       <textarea
-        value={props.bodyValue}
-        onChange={props.handleBodyChange}
+        value={bodyValue}
+        onChange={handleBodyChange}
         className="new-post-body"
         placeholder="Write your post here..."
       />

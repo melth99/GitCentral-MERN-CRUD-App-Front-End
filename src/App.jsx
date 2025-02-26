@@ -14,24 +14,7 @@ const App = () => {
   const { user } = useContext(UserContext);
   const [forums, setForums] = useState([]);
 
-  useEffect(() => {
-    async function fetchForums() {
-      try {
-        const data = await forumsService.index();
-        console.log('fetch forum index!', data);
-        setForums(data);
-      } catch (err) {
-        console.error('Error fetching forums:', err.message);
-        // Optionally set an error state to display to the user
-        // setError(err.message);
-      }
-    }
-
-    // Only fetch forums if the user is authenticated
-    if (user) {
-      fetchForums();
-    }
-  }, [user]); // Add user as a dependency so it re-runs when user changes
+   // Add user as a dependency so it re-runs when user changes
 
   async function handleCreateForum(forumData) {
     try {
@@ -42,6 +25,26 @@ const App = () => {
       console.log(err.message);
     }
   }
+
+//NewForum.newForum
+async function handleCreateForum(forumData) {
+  try {
+      // Ensure forumData has all required fields
+      const newForumData = {
+          ...forumData,
+          createdBy: user?._id, // Add user ID if available
+          createdAt: new Date().toISOString()
+      };
+      const data = await forumsService.create(newForumData);
+      setForums([...forums, data]);
+      return data; // Return the created forum
+  } catch (err) {
+      console.error('Error creating forum:', err);
+      throw err;
+
+  }
+}
+  console.log(typeof handleCreateForum)
 
   async function handleDeleteForum(forumIdToDelete) {
     try {
@@ -66,7 +69,7 @@ const App = () => {
             user ? (
               <Dashboard
                 forums={forums}
-                onCreateForum={handleCreateForum}
+                 handleCreateForum={handleCreateForum}
                 onDeleteForum={handleDeleteForum}
               />
             ) : (
@@ -77,7 +80,10 @@ const App = () => {
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
         <Route path='/profile' element={<ProfilePage />} />
-        <Route path='/topics/:topicId' element={<TopicBoard />} />
+        <Route
+          path='/topics/:topicId'
+          element={<TopicBoard onCreateForum={handleCreateForum} />}
+        />
         <Route path="/profile/*" element={<ProfilePage />} />
       </Routes>
     </>
