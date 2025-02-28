@@ -46,7 +46,7 @@ const TopicBoard = () => {
 
     const fetchPosts = async () => {
       try {
-        const response = await fetch(import.meta.env.VITE_BACK_END_SERVER_URL + `/posts/${topicId}`);
+        const response = await fetch(import.meta.env.VITE_BACK_END_SERVER_URL + `/posts`);
         if (!response.ok) throw new Error('Failed to fetch posts');
         const allPosts = await response.json();
         setPosts(allPosts);
