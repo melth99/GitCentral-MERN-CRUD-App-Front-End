@@ -1,7 +1,7 @@
 // frontend/services/forumsService.js
 import { getToken } from './tokenService';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = import.meta.env.VITE_BACK_END_SERVER_URL;
 
 const getHeaders = () => {
   const token = getToken();

@@ -31,7 +31,7 @@ const TopicBoard = () => {
   useEffect(() => {
     const fetchForums = async () => {
       try {
-        const response = await fetch('http://localhost:3000/forums');
+        const response = await fetch(import.meta.env.VITE_BACK_END_SERVER_URL + '/forums');
         if (!response.ok) throw new Error('Failed to fetch forums');
         const forums = await response.json();
         setForumList(forums);
@@ -46,7 +46,7 @@ const TopicBoard = () => {
 
     const fetchPosts = async () => {
       try {
-        const response = await fetch('http://localhost:3000/posts');
+        const response = await fetch(import.meta.env.VITE_BACK_END_SERVER_URL + `/posts/${topicId}`);
         if (!response.ok) throw new Error('Failed to fetch posts');
         const allPosts = await response.json();
         setPosts(allPosts);

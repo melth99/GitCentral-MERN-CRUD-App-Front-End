@@ -1,7 +1,7 @@
 // frontend/services/postService.js
 import { getToken } from './tokenService';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = import.meta.env.VITE_BACK_END_SERVER_URL;
 
 // Helper function to build headers with token
 const getHeaders = () => {
