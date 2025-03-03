@@ -22,7 +22,6 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      {user && <h2>Welcome, {user.username}</h2>}
       <TopicBoard />
     </div>
   );

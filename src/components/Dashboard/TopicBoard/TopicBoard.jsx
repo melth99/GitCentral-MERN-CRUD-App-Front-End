@@ -147,26 +147,31 @@ const TopicBoard = () => {
           <div className="image-container">
             <img
               src={selectedTopic?.imageUrl || 'https://via.placeholder.com/150'}
-              alt={selectedTopic?.title || 'Home Dashboard'}
+              alt={selectedTopic?.title || `Hello, {user.username}!`}
               onError={(e) => (e.target.style.display = 'none')}
             />
           </div>
           <div id="topic-info">
-            <h1 id="topic-board-title">{selectedTopic?.title || 'Home Dashboard'}</h1>
+            <h1 id="topic-board-title">{selectedTopic?.title || `Welcome back, ${user.username}!`}</h1>
             <div className="buttons-container">
-              <button className="follow-button">
+              
+              {selectedTopic ? (
+  <>
+  <button className="follow-button">
                 followers: {selectedTopic?.followers || 'unknown'}
               </button>
-              {!showNewPost && (
-                <button onClick={handleButtonClick} className="new-post-button">
-                  Create a Post
-                </button>
-              )}
-              {!showNewForum && (
-                <button onClick={handleForumButtonClick} className="new-forum-button">
-                  Create a Forum
-                </button>
-              )}
+    {!showNewPost && (
+      <button onClick={handleButtonClick} className="new-post-button">
+        Create a Post
+      </button>
+    )}
+    {!showNewForum && (
+      <button onClick={handleForumButtonClick} className="new-forum-button">
+        Create a Forum
+      </button>
+    )}
+  </>
+) : null}
             </div>
             {showNewForum && (
               <div ref={newForumRef}>
